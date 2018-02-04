@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <sting.h>
 #include <stdlib.h>
+
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) 
 {
-
 	struct ListNode *head = NULL, *tmp, *p, *left = NULL, *ll2 = l2;
 
 	int step = 0;
