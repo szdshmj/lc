@@ -85,6 +85,10 @@ int main()
 	p = threeSum(a, sizeof(a) / sizeof(a[0]), &s);
 
 	for(int i = 0; i < s; i++) {
+<<<<<<< HEAD
 		printf("%d, %d, %d\n", p[i][0], p[i][1], p[i][2]);
+=======
+//		printf("%d, %d, %d\n", p[i][0], p[i][1], p[i][2]);
+>>>>>>> e2cc0bc9f0aed50111ff5e8829ae2f108ccedacd
 	}
 }
