@@ -81,9 +81,11 @@ int** threeSum(int* nums, int numsSize, int* returnSize) {
 
 int main()
 {
-	int a[] = {-1, 0, 1, 2, -1, -4}, **p, s;
-	p = threeSum(a, sizeof(a) / sizeof(a[0]), &s);
+	int a[] = {-1, 0, 1, 2, -1, -4}, **p, s = 0;
 
+	p = threeSum(a, sizeof(a) / sizeof(a[0]), &s);
 	for(int i = 0; i < s; i++)
 		printf("%d, %d, %d\n", p[i][0], p[i][1], p[i][2]);
+
+	return 0;
 }
