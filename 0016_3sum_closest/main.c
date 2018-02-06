@@ -51,7 +51,7 @@ int smart(int* nums, int numsSize, int target) {
 
 			if(sum < target) {
 				diff = target - sum;
-				`while(nums[l] == nums[l + 1]) l++;
+				while(nums[l] == nums[l + 1]) l++;
 				l++;
 			}
 			else if(sum > target) {
