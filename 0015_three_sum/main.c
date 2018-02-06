@@ -80,11 +80,9 @@ void bubbleSort(int *a, int numsSize)
 #endif
 }
 
-int** smart(int* nums, int numsSize, int* returnSize) {
+int** threeSumByOrder(int* nums, int numsSize, int* returnSize) {
 
 	int **p = NULL, count = 0, l, r;
-
-	bubbleSort(nums, numsSize);
 
 	if(nums[0] > 0 || nums[numsSize -1] < 0)
 		return p;
@@ -153,12 +151,14 @@ int** threeSum(int* nums, int numsSize, int* returnSize) {
 			*returnSize = 1;
 		}
 	}
-	else
+	else {
 #if 0
 		p = exhaustion(nums, numsSize, returnSize);
 #else
-		p = smart(nums, numsSize, returnSize);
+		bubbleSort(nums, numsSize);
+		p = threeSumByOrder(nums, numsSize, returnSize);
 #endif
+	}
 
 	return p;
 }
