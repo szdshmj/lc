@@ -40,7 +40,7 @@ int smart(int* nums, int numsSize, int target) {
 
 	for(int i = 0; i < numsSize - 2; i++) {
 
-//		if(i > 0) while(nums[i] == nums[i - 1] && i < numsSize - 2) i++;
+		if(i > 0) while(nums[i] == nums[i - 1] && i < numsSize - 2) i++;
 
 		l = i + 1;
 		r = numsSize - 1;
@@ -51,12 +51,12 @@ int smart(int* nums, int numsSize, int target) {
 
 			if(sum < target) {
 				diff = target - sum;
-				//`while(nums[l] == nums[l + 1]) l++;
+				`while(nums[l] == nums[l + 1]) l++;
 				l++;
 			}
 			else if(sum > target) {
 				diff = sum - target;
-				//while(nums[r] == nums[r - 1]) r--;
+				while(nums[r] == nums[r - 1]) r--;
 				r--;
 			}
 			else
