@@ -32,11 +32,9 @@ void bubbleSort(int *a, int numsSize)
 #endif
 }
 
-int smart(int* nums, int numsSize, int target) {
+int threeSumClosestByOrder(int* nums, int numsSize, int target) {
 
 	int l, r, closest = INT_MAX, diff, diffmax = INT_MAX;
-
-	bubbleSort(nums, numsSize);
 
 	for(int i = 0; i < numsSize - 2; i++) {
 
@@ -81,11 +79,12 @@ int threeSumClosest(int* nums, int numsSize, int target) {
 
 		for(int i = 0; i < numsSize; i++)
 			s += nums[i];
-
 		return s;
 	}
-	else
-		return smart(nums, numsSize, target);
+	else {
+		bubbleSort(nums, numsSize);
+		return threeSumClosestByOrder(nums, numsSize, target);
+	}
 }
 
 int main()
