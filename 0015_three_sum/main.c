@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-int** threeSum2(int* nums, int numsSize, int* returnSize) {
+int** exhaustion(int* nums, int numsSize, int* returnSize) {
 
 	int **p = NULL, count = 0;
 
@@ -19,7 +19,7 @@ int** threeSum2(int* nums, int numsSize, int* returnSize) {
 
 					if(a > b) {t = a; a = b; b = t;}
 					if(b > c) {t = b; b = c; c = t;}
-					if(a > c) {t = a; c = a; a = t;}
+					if(a > b) {t = a; a = b; b = t;}
 
 					for(int m = 0; m < count; m++) {
 						if(p[m][0] == a && p[m][1] == b && p[m][2] == c) {
@@ -36,8 +36,8 @@ int** threeSum2(int* nums, int numsSize, int* returnSize) {
 						arr[2] = c;
 						if(count == 0)
 							p = malloc(sizeof(int *));
-						else 
-							p = realloc(p, count + 1);
+						else
+							p = realloc(p, sizeof(int *) * count + 1);
 
 						p[count++] = arr;
 					}
@@ -52,11 +52,91 @@ int** threeSum2(int* nums, int numsSize, int* returnSize) {
 	return p;
 }
 
+void bubbleSort(int *a, int numsSize)
+{
+	int ex = 1, last = numsSize - 1;
+
+	for(int i = 0; i < numsSize - 1 && ex; i++) {
+		
+		ex = 0;
+		for(int j = 0; j < last; j++) {
+			
+			if(a[j + 1] < a[j]) {
+
+				int t = a[j + 1];
+				a[j + 1] = a[j];
+				a[j] = t;
+				ex = j;
+			}
+		}
+		last = ex;
+	}
+
+#if 0
+	printf("[ ");
+	for(int i = 0; i < numsSize; i++)
+		printf("%d ", a[i]);
+	printf("]\n");
+#endif
+}
+
+int** smart(int* nums, int numsSize, int* returnSize) {
+
+	int **p = NULL, count = 0, l, r;
+
+	bubbleSort(nums, numsSize);
+
+	if(nums[0] > 0 || nums[numsSize -1] < 0)
+		return p;
+
+	for(int i = 0; i < numsSize - 2; i++) {
+
+		if(nums[i] > 0)
+			break;
+
+		if(i > 0 && nums[i] == nums[i - 1])
+			continue;
+		
+		l = i + 1;
+		r = numsSize - 1;
+
+		while(l < r) {
+
+			if(nums[l] + nums[r] == 0 - nums[i]) {
+
+				int *arr = malloc(sizeof(int) * 3);
+
+				arr[0] = nums[i];
+				arr[1] = nums[l];;
+				arr[2] = nums[r];;
+				if(count == 0)
+					p = malloc(sizeof(int *));
+				else
+					p = realloc(p, sizeof(int *) * count + 1);
+
+				p[count++] = arr;
+
+				while(nums[l] == nums[l + 1] && l < r) l++;
+				while(nums[r] == nums[l - 1] && l < r) r--;
+
+				l++;
+				r--;
+			}
+			else if(nums[l] + nums[r] < -nums[i])
+				l++;
+			else if(nums[l] + nums[r] > -nums[i])
+				r--;
+		}
+	}
+	*returnSize = count;
+	return p;
+}
+
 int** threeSum(int* nums, int numsSize, int* returnSize) {
 
 	int **p = NULL;
 
-	if(returnSize == NULL) 
+	if(returnSize == NULL)
 		returnSize = calloc(sizeof(int), 1);
 
 	if(nums == NULL || numsSize < 3)
@@ -69,21 +149,27 @@ int** threeSum(int* nums, int numsSize, int* returnSize) {
 			p[0] = malloc(sizeof(int) * 3);
 			for(int i = 0; i < 3; i++)
 				p[0][i] = nums[i];
-			
+
 			*returnSize = 1;
 		}
 	}
 	else
-		p = threeSum2(nums, numsSize, returnSize);
+#if 0
+		p = exhaustion(nums, numsSize, returnSize);
+#else
+		p = smart(nums, numsSize, returnSize);
+#endif
 
 	return p;
 }
 
 int main()
 {
-	int a[] = {-1, 0, 1, 2, -1, -4}, **p, s = 0;
+	//int a[] = {-1, 0, 1, 2, -1, -4}, **p, s = 0;
+	int a[] = {1, 2, -2 , -1}, **p, s = 0;
 
 	p = threeSum(a, sizeof(a) / sizeof(a[0]), &s);
+
 	for(int i = 0; i < s; i++)
 		printf("%d, %d, %d\n", p[i][0], p[i][1], p[i][2]);
 
