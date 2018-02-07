@@ -82,7 +82,7 @@ void bubbleSort(int *a, int numsSize)
 
 int** threeSumByOrder(int* nums, int numsSize, int* returnSize) {
 
-	int **p = NULL, count = 0, l, r;
+	int **p = NULL, count = 0, l, r, target = 0;
 
 	if(nums[0] > 0 || nums[numsSize -1] < 0)
 		return p;
@@ -100,7 +100,8 @@ int** threeSumByOrder(int* nums, int numsSize, int* returnSize) {
 
 		while(l < r) {
 
-			if(nums[l] + nums[r] == 0 - nums[i]) {
+			int sum = nums[l] + nums[r] + nums[i];
+			if(sum == target ) {
 
 				int *arr = malloc(sizeof(int) * 3);
 
@@ -120,9 +121,9 @@ int** threeSumByOrder(int* nums, int numsSize, int* returnSize) {
 				l++;
 				r--;
 			}
-			else if(nums[l] + nums[r] < -nums[i])
+			else if(sum < target)
 				l++;
-			else if(nums[l] + nums[r] > -nums[i])
+			else if(sum > target)
 				r--;
 		}
 	}
