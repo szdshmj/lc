@@ -24,7 +24,7 @@ int strStr(char* haystack, char* needle) {
 	if(ls < lp)
 		return -1;
 
-	for(int i = 0; i < ls; i++) {
+	for(int i = 0; i + lp <= ls; i++) {
 
 		found = 1;
 		for(int j = 0; j < lp && found; j++) {
@@ -41,7 +41,7 @@ int strStr(char* haystack, char* needle) {
 
 int main()
 {
-	char *h = "";
+	char *h = "abc";
 	char *n = "";
 	printf("%d\n", strStr(h, n));
 }
