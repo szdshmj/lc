@@ -28,13 +28,14 @@ struct ListNode* makeList(int *a, int n) {
 
 void dump(struct ListNode *l) {
 
-	int i = 0;
+	if(!l)
+		return;
+
 	while(l) {
 
 		printf("%d ", l->val);
 		l = l->next;
-		if(i == 0) i = 1;
 	}
-	if(i == 1) printf("\n");
+	printf("\n");
 }
 #endif
