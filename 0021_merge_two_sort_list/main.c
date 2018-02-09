@@ -2,42 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-struct ListNode {
-	int val;
-	struct ListNode *next;
-};
-
-struct ListNode* makeList(int *a, int n) {
-
-	struct ListNode *tmp, *head = NULL, *cur;
-
-	if(a == NULL || n == 0)
-		return NULL;
-
-	for(int i = 0; i < n; i++) {
-		tmp = (struct ListNode *)calloc(1, sizeof(struct ListNode));
-		tmp->val = a[i];
-		if(i == 0)
-			head = tmp;
-		else
-			cur->next = tmp;
-		cur = tmp;
-	}
-
-	return head;
-}
-
-void dump(struct ListNode *l) {
-
-	int i = 0;
-	while(l) {
-
-		printf("%d ", l->val);
-		l = l->next;
-		if(i == 0) i = 1;
-	}
-	if(i == 1) printf("\n");
-}
+#include "../node.h"
 
 struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2) {
 
