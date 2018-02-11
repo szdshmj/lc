@@ -12,10 +12,12 @@ int compare(char *s, char *w, int wlen)
 	return 0;
 }
 
-int compares(char* s, int wlen, char** words, int wordsSize)
+int compares(char* s, int slen, int wlen, char** words, int wordsSize, int *flag)
 {
-	int match = 0, find = 1, slen = strlen(s), *flag = calloc(sizeof(int), wordsSize);
+	int match = 0, find = 1;
 	
+	for(int i = 0; i < wordsSize; i++) flag[i] = 0;
+
 	for(int i = 0; i < slen && find; i += wlen) {
 		
 		find = 0;
@@ -39,13 +41,12 @@ int compares(char* s, int wlen, char** words, int wordsSize)
 		}
 	}
 
-	free(flag);
 	return match;
 }
 
 int* findSubstring(char* s, char** words, int wordsSize, int* returnSize) {
 
-	int slen, wlen, tlen, *pos = NULL;
+	int slen, wlen, tlen, *pos = NULL, *flag;
 
 	if(s == NULL || words == NULL || wordsSize < 1){
 		*returnSize = 0;
@@ -56,20 +57,17 @@ int* findSubstring(char* s, char** words, int wordsSize, int* returnSize) {
 	slen = strlen(s);
 	wlen = strlen(words[0]);
 	tlen = wlen * wordsSize;
+	flag = calloc(sizeof(int), wordsSize);
 
 	for(int i = 0; i + tlen <= slen; i++) {
 		
-		char *tmp = (char *) malloc(tlen + 1);
-
-		memcpy(tmp, s + i, tlen);
-		tmp[tlen] = '\0';
-		if(compares(tmp, wlen, words, wordsSize) == 0) {
+		if(compares(s + i, tlen, wlen, words, wordsSize, flag) == 0) {
 			if(!pos)
 				pos = malloc(sizeof(int) * 32);
 			pos[(*returnSize)++] = i;
 		}
-		free(tmp);
 	}
+	free(flag);
 
 	return pos;
 }
