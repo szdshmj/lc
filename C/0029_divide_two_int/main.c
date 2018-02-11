@@ -17,14 +17,11 @@ int max_i(int dividend, int divisor)
 
 int divide(int dividend, int divisor) {
 
-	int sign = 0, result = 0;
-	unsigned int udivisor, udividend;
+	int sign = 0, result = 0, m;
+	unsigned int udivisor, udividend, tmp;
 
-	if((divisor == 0) || (divisor == -1 && dividend == INT_MIN))
-		return INT_MAX;
-
-	if(divisor == 1)
-		return dividend;
+	if((divisor == 0) || (divisor == -1 && dividend == INT_MIN)) return INT_MAX;
+	if(divisor == 1) return dividend;
 
 	sign = (dividend ^ divisor) >> ((sizeof(int) << 3) - 1);
 	udivisor = (divisor < 0) ? -divisor : divisor;
@@ -32,45 +29,19 @@ int divide(int dividend, int divisor) {
 
 	while(udividend >= udivisor) {
 
-		int i = max_i(udividend, udivisor);
+		tmp = udivisor;
+		m = 1;
 
-		udividend -= (udivisor << i);
+		while(udividend > (tmp << 1)) {
 
-		if(i > 0)
-			result += (1 << i);
-		else
-			result++;
+			tmp <<= 1;
+			m <<= 1;	
+		}
+
+		udividend -= tmp;
+		result += m;
 	}
 	return (sign == 0) ? result : -result;
-}
-
-int divide2(int dividend, int divisor) {
-	//special cases
-	if(divisor == 0 || (dividend == INT_MIN && divisor == -1))
-		return INT_MAX;
-
-	// transform to unsigned int
-	bool sign = (dividend > 0)^(divisor > 0);
-	unsigned int A = (divisor < 0) ? -divisor : divisor;
-	unsigned int B = (dividend < 0) ? -dividend : dividend;
-	int ret = 0;
-
-	// shift 32 times
-	for(int i = 31; i >= 0; i--)
-	{
-		if((B>>i) >= A)
-		{
-			ret = (ret<<1)|0x01;
-			B -= (A<<i);   // update B
-		}
-		else
-			ret = ret<<1;
-	}
-
-	if(sign)
-		ret = -ret;
-
-	return ret;
 }
 
 int main()
