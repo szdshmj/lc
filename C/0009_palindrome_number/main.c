@@ -3,6 +3,12 @@
 #include <string.h>
 #include <limits.h>
 
+#ifndef __cplusplus
+	#define bool int
+	#define true 1
+	#define false 0
+#endif
+
 int a[] = {1000000000, 100000000, 10000000, 1000000, 100000, 10000, 1000, 100, 10};
 bool isPalindrome(int x) {
 	
