@@ -1,8 +1,14 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "../inc.h"
 
-int rang(char *s, int start, int end);
+int rang(char *s, int start, int end)
+{
+	for(int i = start; i < end; i++) {
+		if(s[end] == s[i])
+			return 1;
+	}
+	return 0;
+}
+
 int lengthOfLongestSubstring(char* s) {
 
     int i, j, len;//, c;
@@ -44,15 +50,6 @@ int lengthOfLongestSubstring(char* s) {
     //for(int i = m[mi][0]; i < max + m[mi][0]; i++)
        // printf("%c", s[i]);
     return max;
-}
-
-int rang(char *s, int start, int end)
-{
-	for(int i = start; i < end; i++) {
-		if(s[end] == s[i])
-			return 1;
-	}
-	return 0;
 }
 
 int main()

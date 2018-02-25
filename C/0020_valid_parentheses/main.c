@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#incldue "../inc.h"
 
 bool isValid(char* s) {
 

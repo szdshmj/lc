@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "../inc.h"
 
 char map[10][5] = {
 		//{' ', '\0', }, 

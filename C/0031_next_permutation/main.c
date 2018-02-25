@@ -1,8 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "../inc.h"
 #include <limits.h>
-
 #include "../sort.h"
 
 void dump(int *nums, int numsSize)

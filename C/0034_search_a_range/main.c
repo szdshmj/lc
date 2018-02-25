@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
+#incldue "../inc.h"
 
 int binarySearch(int *nums, int numsSize, int target)
 {

@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "../inc.h"
 
 int isPalindrome(char *s, int start, int stop)
 {

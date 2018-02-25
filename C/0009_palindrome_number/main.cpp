@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "../inc.h"
 #include <limits.h>
 
 int a[] = {1000000000, 100000000, 10000000, 1000000, 100000, 10000, 1000, 100, 10};

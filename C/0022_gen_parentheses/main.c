@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "../inc.h"
 
 void generateParenthes(char **p, char *tmp, int left, int right, int *returnSize)
 {

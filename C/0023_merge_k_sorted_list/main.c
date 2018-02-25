@@ -1,8 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
+#include "../inc.h"
 #include "../node.h"
+
 struct ListNode* merge2List(struct ListNode *l1, struct ListNode *l2)
 {
 	struct ListNode *t = NULL, *tmp, *curr = NULL;

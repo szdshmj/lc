@@ -1,3 +1,5 @@
+#include "../inc.h"
+
 char* longestCommonPrefix(char** strs, int strsSize) {
 
 	int pos = 0;

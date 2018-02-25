@@ -1,3 +1,5 @@
+#include "../inc.h"
+
 int romanToInt(char* s) {
 
 	int total = 0, fast = 0, a;

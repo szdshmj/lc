@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <sting.h>
-#include <stdlib.h>
+#include "../inc.h"
 
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) 
 {

@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "../inc.h"
 #include "../node.h"
 
 struct ListNode* removeNthFromEnd(struct ListNode* head, int n) {

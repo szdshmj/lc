@@ -1,10 +1,7 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "../inc.h"
+#include "../sort.h"
 #include <limits.h>
 #include <math.h>
-
-#include "../sort.h"
 
 int threeSumClosestByOrder(int* nums, int numsSize, int target) {
 

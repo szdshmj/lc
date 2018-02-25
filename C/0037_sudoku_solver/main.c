@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "../inc.h"
 
 void dump(char *board, int boardRowSize, int boardColSize) {
 

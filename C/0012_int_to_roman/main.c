@@ -1,3 +1,5 @@
+#include "../inc.h"
+
 char roman[4][2] = {{'I', 'V'},{'X','L'}, {'C','D'}, {'M', '\0'}};
 
 char* dump(char *str, int n, int pos) {

@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "../inc.h"
 
 double findKth(int* nums1, int nums1Size, int* nums2, int nums2Size, int k)
 {

@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "../inc.h"
 
 int removeElement(int* nums, int numsSize, int val) {
 	

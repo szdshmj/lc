@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "../inc.h"
 
 bool isValidSudoku2(char **board, int r, int c)
 {

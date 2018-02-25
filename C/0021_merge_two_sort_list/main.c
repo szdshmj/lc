@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
+#include "../inc.h"
 #include "../node.h"
 
 struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2) {

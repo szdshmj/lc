@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "../inc.h"
 #include <limits.h>
 
 int max_i(int dividend, int divisor)

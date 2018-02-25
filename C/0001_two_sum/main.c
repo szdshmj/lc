@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <sting.h>
-#include <stdlib.h>
+#include "../inc.h"
 
 int* twoSum(int* nums, int numsSize, int target) 
 {
