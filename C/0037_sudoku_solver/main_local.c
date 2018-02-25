@@ -39,41 +39,34 @@ void opCo(char *board, int boardRowSize, int boardColSize, int *co[][9], int fla
 				free(co[i][j]);
 }
 
+void mark(int *tmp, char v)
+{
+	if(v != '.')
+		tmp[v - '0'] = 1;
+}
+
 void updateCo(char *board, int boardRowSize, int boardColSize, int row, int col, int *tmp)
 {
-	int r = row - row % 3, c = col - col % 3, n;
+	int r = row - row % 3, c = col - col % 3;
 
 	tmp[0] = 1;
 	for(int i = 0; i < boardColSize; i++) {
 
 		if(i == col) continue;
-		char v = *(board + row * boardColSize + i); 
-		if(v != '.') {
-			n = v - '0';
-			tmp[n] = 1;
-		}
+		mark(tmp, *(board + row * boardColSize + i)); 
 	}
 
 	for(int i = 0; i < boardRowSize; i++) {
 
 		if(i == row) continue;
-		char v = *(board + boardColSize * i + col); 
-		if(v != '.') {
-			n = v - '0';
-			tmp[n] = 1;
-		}
+		mark(tmp, *(board + boardColSize * i + col)); 
 	}
 
 	for(int i = r; i < r + 3; i++) {
 		for(int j = c; j < c + 3; j++) {
 
 			if(r == row && c == col) continue;
-
-			char v = *(board + i * boardColSize + j); 
-			if(v != '.') {
-				n = v - '0';
-				tmp[n] = 1;
-			}
+			mark(tmp, *(board + i * boardColSize + j)); 
 		}
 	}
 }
@@ -87,16 +80,14 @@ void updateCos(char* board, int boardRowSize, int boardColSize, int *co[][9])
 			if(*(board + boardColSize * i + j) == '.') 
 				updateCo(board, boardRowSize, boardColSize, i, j, co[i][j]);
 			else
-				for(int k = 0; k < 10; k++) {
-					int *tmp = co[i][j];
-					tmp[k] = 1;
-				}
+				for(int k = 0; k < 10; k++)
+					co[i][j][k] = 1;
 		}
 	}
 	//dumpCo(co);
 }
 
-int checkKatIJ(char* board, int boardRowSize, int boardColSize, int i, int j, int k)
+int tryKatIJ(char* board, int boardRowSize, int boardColSize, int i, int j, int k)
 {
 	int tmp[10];
 
@@ -116,8 +107,7 @@ int solveSudoku2(char* board, int boardRowSize, int boardColSize, int i, int j, 
 	if(*(board + boardColSize * i + j) == '.') {
 		for(int k = 1; k < 10; k++) {
 
-			int *tmp = co[i][j];
-			if((tmp[k] == 1) || (checkKatIJ(board, boardRowSize, boardColSize, i, j, k) != 0))
+			if((co[i][j][k] == 1) || (tryKatIJ(board, boardRowSize, boardColSize, i, j, k) != 0))
 				continue;
 
 			*(board + boardColSize * i + j) = k + '0';
