@@ -5,4 +5,5 @@ a
 a.out
 main
 main.o
+main_*
 *core*
