@@ -40,7 +40,7 @@ int** dfs(int **result, int *pre, int pn, int* candidates, int candidatesSize, i
 				result = dfs(result, newPre, pn + j, candidates + i + 1, leftSize, target - candidates[i] * j, columnSizes, returnSize);
 			else
 				result = record(result, columnSizes, returnSize, newPre, pn + j);
-			//free(newPre);
+			free(newPre);
 		}
 	}
 	return result;
