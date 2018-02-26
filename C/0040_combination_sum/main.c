@@ -24,26 +24,26 @@ int** record(int **result, int *pre, int pn, int** columnSizes, int* returnSize)
 int** dfs(int **result, int *pre, int pn, int* candidates, int candidatesSize, int target, int** columnSizes, int* returnSize)
 {
 	for(int i = 0; i < candidatesSize; i++) {
-		
-		if(target == 0/*candidates[i]*/) {
-			result = record(result, pre, pn, columnSizes, returnSize);
-			break;
-		}
-		else if(target - candidates[i] >= 0){
-			int *newPre = malloc(sizeof(int) * (pn + 1));
 
-			for(int k = 0; k < pn; k++) newPre[k] = pre[k];
-			newPre[pn] = candidates[i];
+		if(i > 0 && candidates[i] == candidates[i - 1]) continue;
+		int *newPre = malloc(sizeof(int) * (pn + 1));
+
+		for(int k = 0; k < pn; k++) newPre[k] = pre[k];
+		newPre[pn] = candidates[i];
+
+		if(target > candidates[i])
 			result = dfs(result, newPre, pn + 1, candidates + i + 1, candidatesSize - i - 1, target - candidates[i], columnSizes, returnSize);
-			free(newPre);
+		else if(target == candidates[i]) {
+			result = record(result, newPre, pn + 1, columnSizes, returnSize);
 		}
+		free(newPre);
 	}
 
 	return result;
 }
 
 int** combinationSum2(int* candidates, int candidatesSize, int target, int** columnSizes, int* returnSize) {
-	
+
 	int **result = NULL;
 
 	*columnSizes = NULL;
@@ -57,9 +57,17 @@ int** combinationSum2(int* candidates, int candidatesSize, int target, int** col
 }
 
 int main() {
+
+	#if 1
 	int candidates[] = {10, 1, 2, 7, 6, 1, 5};
 	int candidatesSize = 7;
 	int target = 8;
+	#else
+	int candidates[] = {1};
+	int candidatesSize = 1;
+	int target = 1;
+	#endif
+
 	int *columnSizes;
 	int returnSize;
 	int ** result;
