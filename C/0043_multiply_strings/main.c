@@ -1,10 +1,15 @@
 #include "../inc.h"
 
-char* simply(char *tmp, int tlen, char *num1, char s)
+char* simply(char *tmp, int tlen, char *num1, int a)
 {
+	int m, t, shift = 0;
+
 	memset(tmp, 0, tlen);
 	for(int i = 0; i < strlen(num1); i++) {
 		
+		m = (num1 - '0') * a
+
+		if(m 
 	}
 
 	printf("%s x %c\n", num1, s);
@@ -23,7 +28,8 @@ char* multiply(char* num1, char* num2) {
 
 	for(int i = 0 ; i < strlen(num2); i++) {
 		
-		simply(tmp, tlen, num1, num2[i]);
+		simply(tmp, tlen, num1, num2[i] - '0');
+		break;
 	}
 
 	return result;
