@@ -8,16 +8,16 @@ void dump(int *height, int heightSize)
 	printf("\n");
 }
 
-int newRight(int s, int *height, int heightSize)
+int newRight(int left, int s, int *height, int heightSize)
 {
 	int mark = -1, h = s;
 
-	//printf("compare %d\n", s);
+	//printf("compare %d,left is %d\n", s, left);
 	for(int i = 0; i < heightSize; i++) {
-		if(height[i] >= h) {
+		if(height[i] >= h && h <= left) {
 			mark = i;		
 			h = height[i];
-	//		printf("find %d at %d\n", height[i], mark);
+			//printf("find %d at %d\n", height[i], mark);
 		}
 	}
 
@@ -29,7 +29,7 @@ int findABowl(int *height, int heightSize, int *result)
 {
 	int left = 0, buttom, right = - 1, pos, skip = 0;
 
-	dump(height, heightSize);
+	//dump(height, heightSize);
 	while(left + 1 < heightSize && height[left + 1] >= height[left]) left++;
 
 	pos = left + 1;
@@ -51,7 +51,7 @@ int findABowl(int *height, int heightSize, int *result)
 	//printf("left %d, right %d, \n", left, right);
 	
 	if(right + 1 < heightSize && height[right] < height[left])
-		skip = newRight(height[right], height + right + 1, heightSize - right - 1);
+		skip = newRight(height[left], height[right], height + right + 1, heightSize - right - 1);
 
 	right = skip > 0 ? right + skip : right;
 
@@ -88,7 +88,6 @@ int trap(int* height, int heightSize) {
 
 int main()
 {
-	int ret; 
 	int a[] = {0,1,0,2,1,0,1,3,2,1,2,1};
 	int b[] = {4, 2, 3};
 	int c[] = {5, 4, 1, 2};
@@ -107,7 +106,8 @@ int main()
 	int expect[] = {6, 1, 1, 14, 23, 83};
 
 	for(int i = 0; i < sizeof(p) / sizeof(p[0]); i++){
-		ret = trap(p[i], s[i]);
+		printf("do %d\n", i);
+		int ret = trap(p[i], s[i]);
 		if(ret != expect[i]) {
 			printf("index %d is wrong, expect %d, but %d\n", i, expect[i], ret);
 			return -1;
