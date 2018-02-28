@@ -75,13 +75,7 @@ int trap(int* height, int heightSize) {
 
 	int l = 0, width = 0, result = 0;
 
-	while(l < heightSize) {
-
-		if((width = findABowl(height + l, heightSize - l, &result)) > 0)
-			l += width;
-		else
-			break;
-	}
+	while((width = findABowl(height + l, heightSize - l, &result)) > 0) l += width;
 
 	return result;
 }
