@@ -21,7 +21,7 @@ int simply(int *tmp, char *n1, int t1, int n2)
 	if(shift > 0)
 		tmp[i++] = shift;
 
-#if 1
+#if 0
 	for(int j = 0; j < i; j++)
 		printf("%d", tmp[j]);
 	printf("\n");
@@ -31,6 +31,27 @@ int simply(int *tmp, char *n1, int t1, int n2)
 
 void add(int b, int *n, int *tmp, int tlen)
 {
+	int shift = 0, i;
+
+	for(i = 0; i < tlen; i++) {
+		
+		n[b + i] += (tmp[i] + shift);
+
+		if(n[b + i] >= 10) {
+			shift = n[b + i] / 10;
+			n[b + i] = n[b + i] % 10;
+		}
+		else if(shift != 0)
+			shift = 0;
+	}
+
+	if(shift)
+		n[b + i] = shift;
+
+	for(int j = 0; j < b + i; j++)
+		printf("%d", n[j]);
+	
+	printf("\n");
 }
 
 char* multiply(char* num1, char* num2) {
