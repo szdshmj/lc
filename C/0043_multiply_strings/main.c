@@ -10,28 +10,30 @@ char* multiply(char* num1, char* num2) {
 		a = num2[t2 - i - 1] - '0';
 		shift = 0;
 		for(j = 0; j < t1; j++) {
+
 			result[i + j] += (a * (num1[t1 - 1 - j] - '0') + shift);
 			if(result[i + j] >= 10) {
+
 				shift = result[i + j] / 10;
 				result[i + j] %= 10;
 			}
 			else if(shift != 0)
 				shift = 0;
 		}
-		if(shift)
-			result[i + j] = shift;
+		if(shift) result[i + j] = shift;
 	}
 
 	for(j = t1 + t2 - 1, i = 0; j > 0 && result[j] == 0; j--);
 	result[j + 1] = '\0';
 
 	while(i < j) {
+
 		char t = result[i] + '0';
 		result[i] = result[j] + '0';
 		result[j] = t;
 		i++;j--;
 	}
-	if(i == j)result[i] += '0';
+	if(i == j) result[i] += '0';
 
 	return result;
 }
