@@ -2,12 +2,8 @@
 
 char* multiply(char* num1, char* num2) {
 
-	char *result = NULL;
-	int a, t1, t2, i, j, shift = 0;
-
-	t1 = strlen(num1);
-	t2 = strlen(num2);
-	result = calloc(1, t1 + t2 + 1);
+	int a, i, j, shift = 0, t1 = strlen(num1), t2 = strlen(num2);
+	char *result = calloc(1, t1 + t2 + 1);
 
 	for(i = 0; i < t2; i++) {
 
