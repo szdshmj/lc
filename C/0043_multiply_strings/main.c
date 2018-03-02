@@ -24,7 +24,6 @@ char* multiply(char* num1, char* num2) {
 	}
 
 	for(j = t1 + t2 - 1, i = 0; j > 0 && result[j] == 0; j--);
-	result[j + 1] = '\0';
 
 	while(i < j) {
 
