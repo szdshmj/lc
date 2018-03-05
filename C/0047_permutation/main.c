@@ -1,14 +1,29 @@
 #include "../inc.h"
 
-/*int** genP(int **sofar, int **old, int oldSize)
+int canAdd(int num0, int **result, int *line, int lineSize, int acc)
 {
-	int **result = 0;
+	int *r, flag;
 
-	if(oldSize > 0) {
-	
-		result = malloc(sizeof(int *) * oldSize);
+	for(int i = 0; i < acc; i++) {
+
+		r = result[i], flag = 0;
+
+		if(r[0] != num0)
+			continue;
+
+		for(int j = 0; j < lineSize; j++) {
+				
+			if(line[j] != r[j + 1]) {
+				flag = 1;
+				break;
+			}
+		}
+		if(flag == 0)
+			return -1;
 	}
-}*/
+
+	return 0;
+}
 
 void dump(int **value, int returnSize, int n)
 {
@@ -36,10 +51,9 @@ int** permute(int* nums, int numsSize, int* returnSize) {
 	*returnSize = 0;
 
 	if(numsSize > 1) {
-		int subReturnSize = 0, **subPermute, acc = -1;
+		int subReturnSize = 0, **subPermute, acc = 0;
 		
-		*returnSize = factorial(numsSize);
-		result = malloc(*returnSize * sizeof(int *));
+		result = malloc(factorial(numsSize) * sizeof(int *));
 		for(int i = 0; i < numsSize; i++) {
 			if(i != 0) {
 				int tmp = nums[0];
@@ -50,11 +64,17 @@ int** permute(int* nums, int numsSize, int* returnSize) {
 			subPermute = permute(nums + 1, numsSize - 1, &subReturnSize);
 			
 			for(int j = 0; j < subReturnSize; j++) {
-				result[++acc] = malloc(numsSize * sizeof(int));
-				result[acc][0]= nums[0];
+
+				if(canAdd(nums[0], result, subPermute[j], numsSize - 1, acc) != 0)
+					continue;
+
+				result[acc++] = malloc(numsSize * sizeof(int));
+				result[acc - 1][0]= nums[0];
 				for(int k = 0; k < numsSize - 1; k++)
-					result[acc][k + 1] = subPermute[j][k];
+					result[acc - 1][k + 1] = subPermute[j][k];
+				free(subPermute[j]);
 			}
+			free(subPermute);
 
 			if(i != 0) {
 				int tmp = nums[0];
@@ -62,6 +82,7 @@ int** permute(int* nums, int numsSize, int* returnSize) {
 				nums[i] = tmp;
 			}
 		}
+		*returnSize = acc;
 	}
 	else if(numsSize == 1) {
 		result = malloc(sizeof(int *));
