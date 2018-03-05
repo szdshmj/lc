@@ -16,7 +16,6 @@ void dump(int **value, int returnSize, int n)
 		for(int j = 0; j < n; j++)
 			printf("%d", value[i][j]);
 		printf("\n");
-
 	}
 	printf("total %d\n", returnSize);
 }
