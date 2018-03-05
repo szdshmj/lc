@@ -16,7 +16,6 @@ void dump(int **value, int returnSize, int n)
 		for(int j = 0; j < n; j++)
 			printf("%d", value[i][j]);
 		printf("\n");
-
 	}
 	printf("total %d\n", returnSize);
 }
@@ -55,10 +54,7 @@ int** permute(int* nums, int numsSize, int* returnSize) {
 				result[acc][0]= nums[0];
 				for(int k = 0; k < numsSize - 1; k++)
 					result[acc][k + 1] = subPermute[j][k];
-
-				free(subPermute[j]);
 			}
-			free(subPermute);
 
 			if(i != 0) {
 				int tmp = nums[0];
@@ -79,16 +75,12 @@ int** permute(int* nums, int numsSize, int* returnSize) {
 
 int main(int argc, char *argv[])
 {
-	int **r, nums[128] = {1, 2, 3, 4, 5, 6, 7, 8}, returnSize, n = 3;
+	int **r, nums[128] = {1, 1, 2, 4, 5, 6, 7, 8}, returnSize, n = 3;
 
 	if(argc > 1)
 		n = atoi(argv[1]);
 	
 	r = permute(nums, n, &returnSize);
 	dump(r, returnSize, n);
-
-	for(int i = 0; i < returnSize; i++)
-		free(r[i]);
-	free(r);
 	return 0;
 }
