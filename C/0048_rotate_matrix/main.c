@@ -12,7 +12,7 @@ void dump(int** matrix, int m, int n) {
 
 void rotate_positive_90(int** matrix, int n, int *matrixColSizes) {
 
-	for(int i = 0; i < n; i++) {
+	for(int i = 0; i < n -1; i++) {
 		
 		for(int j = i; j < n - 1 - i; j++) {
 			
@@ -64,7 +64,8 @@ int main(int argc, char *argv[])
 
 	dump(a, n, n);
 	rotate_positive_90(a, n, NULL);
-	//dump(a, n, n);
+	dump(a, n, n);
+	return 0;
 	rotate_positive_90(a, n, NULL);
 	dump(a, n, n);
 	rotate_positive_90(a, n, NULL);
