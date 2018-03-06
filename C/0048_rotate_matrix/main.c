@@ -10,9 +10,8 @@ void dump(int** matrix, int m, int n) {
 	printf("\n");
 }
 
-void rotate(int** matrix, int matrixRowSize, int *matrixColSizes) {
+void rotate_positive_90(int** matrix, int n, int *matrixColSizes) {
 
-	int n = matrixRowSize;
 	for(int i = 0; i < n; i++) {
 		
 		for(int j = i; j < n - 1 - i; j++) {
@@ -26,10 +25,33 @@ void rotate(int** matrix, int matrixRowSize, int *matrixColSizes) {
 	}
 }
 
+void rotate_positive_180(int** matrix, int n, int *matrixColSizes)
+{
+	for(int i = 0; i < n / 2; i++) {
+		
+		for(int j = 0; j < n; j++) {
+
+			int tmp = matrix[i][j];
+			matrix[i][j] = matrix[n - 1 - i][ n - 1 - j];
+			matrix[n - 1 - i][ n - 1 - j] = tmp;
+		}
+	}
+}
+
+void rotate_negtive_90(int** matrix, int n, int *matrixColSizes)
+{
+	
+}
+
+void rotate(int** matrix, int matrixRowSize, int *matrixColSizes)
+{
+	rotate_positive_90(matrix, matrixRowSize, matrixColSizes);
+}
+
 int main(int argc, char *argv[])
 {
 	int n, **a;
-	
+
 	n = atoi(argv[1]);
 	a = malloc(sizeof(int *) * n);
 
@@ -41,18 +63,21 @@ int main(int argc, char *argv[])
 	}
 
 	dump(a, n, n);
-	rotate(a, n, NULL);
+	rotate_positive_90(a, n, NULL);
+	//dump(a, n, n);
+	rotate_positive_90(a, n, NULL);
 	dump(a, n, n);
-	rotate(a, n, NULL);
+	rotate_positive_90(a, n, NULL);
+	//dump(a, n, n);
+	rotate_positive_90(a, n, NULL);
+	//dump(a, n, n);
+	rotate_positive_180(a, n, NULL);
 	dump(a, n, n);
-	rotate(a, n, NULL);
-	dump(a, n, n);
-	rotate(a, n, NULL);
 
 	/*free ......
-	for()
-		free
-	free
-	*/
+	  for()
+	  free
+	  free
+	 */
 	return 0;
 }
