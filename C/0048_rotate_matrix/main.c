@@ -26,41 +26,33 @@ void rotate(int** matrix, int matrixRowSize, int *matrixColSizes) {
 	}
 }
 
-int main()
+int main(int argc, char *argv[])
 {
-	int **aa, **bb;
-	int a[3][3] = { //[0,0]->[0,n-1],[0,1]->[1,n-1],[0,2]->[2,n-1],,,,,[0, n-1]->[n-1,n-1]
-		{1,2,3},	//[0,n-1]->[n-1,n-1],[1,n-1]->[n-1, n-2],,,,,[n-1][n-1]->[n-1,0]
-		{4,5,6},	//[n-1,n-1]->[n-1, 0],[n-1, n-2]->[n-2,0],,,,[n-1,0]->[0,0]
-		{7,8,9}		//[n-1,0]->[0,0],[n-2,0]->[0,1],,,,,,[0,0]->[0,n-1]
-	};
+	int n, **a;
+	
+	n = atoi(argv[1]);
+	a = malloc(sizeof(int *) * n);
 
-	int b[4][4] = {
-		{ 5, 1, 9,11},
-		{ 2, 4, 8,10},
-		{13, 3, 6, 7},
-		{15,14,12,16}
-	};
-
-	aa = malloc(sizeof(int *) * 3);
-	for(int i = 0; i < 3; i++) {
-		aa[i] = malloc(sizeof(int) * 3);
-		for(int j = 0; j < 3; j++) {
-			aa[i][j] = a[i][j];	
+	for(int i = 0; i < n; i++) {
+		a[i] = malloc(sizeof(int) * n);
+		for(int j = 0; j < n; j++) {
+			a[i][j] = i * n + j + 1;	
 		}
 	}
 
-	bb = malloc(sizeof(int *) * 4);
-	for(int i = 0; i < 4; i++) {
-		bb[i] = malloc(sizeof(int) * 4);
-		for(int j = 0; j < 4; j++) {
-			bb[i][j] = b[i][j];	
-		}
-	}
-	rotate(aa, 3, NULL);
-	dump(aa, 3, 3);
-	rotate(bb, 4, NULL);
-	dump(bb, 4, 4);
+	dump(a, n, n);
+	rotate(a, n, NULL);
+	dump(a, n, n);
+	rotate(a, n, NULL);
+	dump(a, n, n);
+	rotate(a, n, NULL);
+	dump(a, n, n);
+	rotate(a, n, NULL);
 
+	/*free ......
+	for()
+		free
+	free
+	*/
 	return 0;
 }
