@@ -33,8 +33,10 @@ int BKDRHash(char *s, int len)
 }
 
 char*** groupAnagrams(char** strs, int strsSize, int** columnSizes, int* returnSize) {
-
+	
+	char ***ret = NULL;
 	struct Hash_str *hs;
+
 	*returnSize = 0;
 	*columnSizes = NULL;
 
@@ -51,6 +53,10 @@ char*** groupAnagrams(char** strs, int strsSize, int** columnSizes, int* returnS
 		qsort(tmp, strlen(tmp), sizeof(char), &compare);
 		h = BKDRHash(tmp, strsSize);// h maybe confilct
 
+		printf("tmp %s, h %d, %s\n", tmp, h, hs[h].sortedStr);
+
+		while(hs[h].sortedStr != NULL && strcmp(hs[h].sortedStr, tmp) != 0)	h = (++h) % strsSize;
+
 		if((hs[h].sortedStr != NULL) && (strcmp(hs[h].sortedStr, tmp) == 0)) {
 			free(tmp);
 			hs[h].count++;
@@ -59,34 +65,39 @@ char*** groupAnagrams(char** strs, int strsSize, int** columnSizes, int* returnS
 		}
 		else {
 
-			while(hs[h].sortedStr != NULL)	h = (++h) % strsSize;
-
 			hs[h].sortedStr = tmp;
 			hs[h].count = 1;
 			hs[h].list = malloc(sizeof(int));
-			*returnSize++;
+			(*returnSize)++;
 			*(hs[h].list) = i;
 		}
 	}
 
-	char ***ret = malloc(sizeof(char **) * *returnSize);
-	for(int i = 0; i < strsSize; i++) {
+	ret = malloc(sizeof(char **) * *returnSize);
+	*columnSizes = malloc(sizeof(int) * *returnSize);
+
+	for(int i = 0, acc = -1; i < strsSize; i++) {
 
 		if(hs[i].sortedStr == NULL)
 			continue;
 
-		printf("%s: ", hs[i].sortedStr);
+		(*columnSizes)[++acc] = hs[i].count;
+		ret[acc] = malloc(sizeof(char *) * hs[i].count);
 
-		for(int j = 0; j < hs[i].count; j++)
-			printf("%s ", strs[hs[i].list[j]]);
-		printf("\n");
+		for(int j = 0; j < hs[i].count; j++) {
+			ret[acc][j] = strdup(strs[hs[i].list[j]]);
+		}
 	}
+	return ret;
 }
 
 int main()
 {
 	int returnSize, *columnSizes;
-	char *str[] = {"eat", "tea", "tan", "ate", "nat", "bat"}, ***ret = groupAnagrams(str, sizeof(str) / sizeof(str[0]), &columnSizes, &returnSize);
+	//char ***ret, *str[] = {"eat", "tea", "tan", "ate", "nat", "bat"}; 
+	char ***ret, *str[] = {"sat","lea","arm","sin","the","nod","guy","ins","rod"}; 
+	
+	ret = groupAnagrams(str, sizeof(str) / sizeof(str[0]), &columnSizes, &returnSize);
 
 	dump(ret, returnSize, columnSizes);
 	return 0;
