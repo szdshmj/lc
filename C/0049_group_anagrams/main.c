@@ -34,7 +34,7 @@ int BKDRHash(char *s, int len)
 
 char*** groupAnagrams(char** strs, int strsSize, int** columnSizes, int* returnSize) {
 	
-	char ***ret = NULL;
+	char ***ret = NULL, *tmp;
 	struct Hash_str *hs;
 
 	*returnSize = 0;
@@ -46,16 +46,13 @@ char*** groupAnagrams(char** strs, int strsSize, int** columnSizes, int* returnS
 	hs = calloc(sizeof(struct Hash_str), strsSize);
 	for(int i = 0; i < strsSize; i++) {
 
-		char *tmp;
-		int h;
-
 		tmp = strdup(strs[i]);
 		qsort(tmp, strlen(tmp), sizeof(char), &compare);
-		h = BKDRHash(tmp, strsSize);// h maybe confilct
+		int h = BKDRHash(tmp, strsSize);// h maybe confilct
 
 		printf("tmp %s, h %d, %s\n", tmp, h, hs[h].sortedStr);
 
-		while(hs[h].sortedStr != NULL && strcmp(hs[h].sortedStr, tmp) != 0)	h = (++h) % strsSize;
+		while(hs[h].sortedStr != NULL && strcmp(hs[h].sortedStr, tmp) != 0)	h = (h + 1) % strsSize;
 
 		if(hs[h].sortedStr != NULL) {
 			free(tmp);
@@ -87,7 +84,10 @@ char*** groupAnagrams(char** strs, int strsSize, int** columnSizes, int* returnS
 		for(int j = 0; j < hs[i].count; j++) {
 			ret[acc][j] = strdup(strs[hs[i].list[j]]);
 		}
+		free(hs[i].sortedStr);
+		free(hs[i].list);
 	}
+	free(hs);
 	return ret;
 }
 
