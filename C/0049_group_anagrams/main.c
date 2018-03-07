@@ -57,7 +57,7 @@ char*** groupAnagrams(char** strs, int strsSize, int** columnSizes, int* returnS
 
 		while(hs[h].sortedStr != NULL && strcmp(hs[h].sortedStr, tmp) != 0)	h = (++h) % strsSize;
 
-		if((hs[h].sortedStr != NULL) && (strcmp(hs[h].sortedStr, tmp) == 0)) {
+		if(hs[h].sortedStr != NULL) {
 			free(tmp);
 			hs[h].count++;
 			hs[h].list = realloc(hs[h].list, hs[h].count);
