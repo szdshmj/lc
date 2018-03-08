@@ -1,4 +1,5 @@
 #include "../inc.h"
+#include <limits.h>
 /*
 Given an array of non-negative integers, you are initially positioned at the first index of the array.
 
@@ -14,42 +15,74 @@ The minimum number of jumps to reach the last index is 2. (Jump 1 step from inde
 Note:
 You can assume that you can always reach the last index.
 */
+
+void dump(int *help, int *step, int numsSize)
+{
+	printf("help\n");
+	for(int i = 0; i < numsSize; i++) {
+		printf("%d ", help[i]);
+	}
+	printf("\nstep\n");
+	for(int i = 0; i < numsSize; i++) {
+		printf("%d ", step[i]);
+	}
+	printf("\n");
+}
+
 int jump(int *nums, int numsSize)
 {
-	int *help = malloc(sizeof(int) * numsSize);
-	int *step = malloc(sizeof(int) * numsSize);
+	int i = 0, j = 0, next, min, jj, *help, *step;
 
-	for(int i = 0; i < numsSize; i++) help[i] = 0;
-	for(int i = 0; i < numsSize; i++) step[i] = 0;
+	help = calloc(sizeof(int), numsSize);
+	step = calloc(sizeof(int), numsSize);
 
-	for(int i = numsSize - 2; i >= 0; i--) {
+	for(i = numsSize - 2; i >= 0; i--) {
 
-		if((nums[i] + i) >= numsSize -1) {
-			help[i] = 1;
-			step
+		if(nums[i] == 0) {
+			help[i] = INT_MAX;
+			step[i] = INT_MAX;
+			continue;
 		}
-		else {
-			
-			int next, min = INT_MAX, jj;
-			for(int j = 1; j <= nums[i]; j++) {
-				
-				next = i + j;
-				if(help[next] < min) {
-					min = help[next];
-					jj = j;
-				}
+
+		if(nums[i] + i >= numsSize - 1) {
+			help[i] = numsSize - 1;
+			step[i] = numsSize - 1 - i;
+			continue;
+		}
+
+		min = INT_MAX - 1;
+		for(j = 1; j <= nums[i]; j++) {
+
+			next = i + j;
+			if(help[next] < min) {
+				min = help[next];
+				jj = j;
 			}
-			help[i] = min + 1;
 		}
+		help[i] = min + 1;
+		step[i] = jj;
 	}
-	for(int i = 0; i < numsSize; i++) printf("%d ", help[i]);
-	printf("\n");
+	
+	//dump(help, step, numsSize);
+	i = 0; j = 0;
+	while(i != numsSize -1) { //printf("%d\n", step[i]);
+
+		i += step[i];
+		j++;
+	}
+
+	free(help);
+	free(step);
+	return j;
 }
 
 int main()
 {
-	int a[] = {2, 3, 1, 1, 4};
+//	int a[] = {2, 3, 1, 1, 4};
+//	int a[] = {1, 2, 0, 1};
+	int a[] = {5, 9, 3, 2, 1, 0, 2, 3, 3, 1, 0, 0};
 
-	jump(a, sizeof(a) / sizeof(a[0]));
+	printf("----%d\n", jump(a, sizeof(a) / sizeof(a[0])));
+
 	return 0;
 }
