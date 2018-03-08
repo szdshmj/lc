@@ -51,6 +51,7 @@ int jump(int *nums, int numsSize)
 		}
 
 		min = INT_MAX - 1;
+		jj = INT_MAX;
 		for(j = 1; j <= nums[i]; j++) {
 
 			if(next[i + j] < min) {
