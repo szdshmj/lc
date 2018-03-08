@@ -16,13 +16,12 @@ bool isMatch(char* s, char* p) {
 			return false;
 	}
 
-	while(p[0] == '*')
-		p++;
+	while(p[0] == '*')	p++;
 
 	return p[0] == '\0';
 }
 
 int main()
 {
-
+	return 0;
 }
