@@ -16,11 +16,11 @@ Note:
 You can assume that you can always reach the last index.
 */
 
-void dump(int *help, int *step, int numsSize)
+void dump(int *next, int *step, int numsSize)
 {
-	printf("help\n");
+	printf("next\n");
 	for(int i = 0; i < numsSize; i++) {
-		printf("%d ", help[i]);
+		printf("%d ", next[i]);
 	}
 	printf("\nstep\n");
 	for(int i = 0; i < numsSize; i++) {
@@ -31,21 +31,21 @@ void dump(int *help, int *step, int numsSize)
 
 int jump(int *nums, int numsSize)
 {
-	int i = 0, j = 0, next, min, jj, *help, *step;
+	int i = 0, j = 0,  min, jj, *next, *step;
 
-	help = calloc(sizeof(int), numsSize);
+	next = calloc(sizeof(int), numsSize);
 	step = calloc(sizeof(int), numsSize);
 
 	for(i = numsSize - 2; i >= 0; i--) {
 
 		if(nums[i] == 0) {
-			help[i] = INT_MAX;
+			next[i] = INT_MAX;
 			step[i] = INT_MAX;
 			continue;
 		}
 
 		if(nums[i] + i >= numsSize - 1) {
-			help[i] = numsSize - 1;
+			next[i] = numsSize - 1;
 			step[i] = numsSize - 1 - i;
 			continue;
 		}
@@ -53,17 +53,16 @@ int jump(int *nums, int numsSize)
 		min = INT_MAX - 1;
 		for(j = 1; j <= nums[i]; j++) {
 
-			next = i + j;
-			if(help[next] < min) {
-				min = help[next];
+			if(next[i + j] < min) {
+				min = next[i + j];
 				jj = j;
 			}
 		}
-		help[i] = min + 1;
+		next[i] = min + 1;
 		step[i] = jj;
 	}
 	
-	//dump(help, step, numsSize);
+	//dump(next, step, numsSize);
 	i = 0; j = 0;
 	while(i != numsSize -1) { //printf("%d\n", step[i]);
 
@@ -71,7 +70,7 @@ int jump(int *nums, int numsSize)
 		j++;
 	}
 
-	free(help);
+	free(next);
 	free(step);
 	return j;
 }
