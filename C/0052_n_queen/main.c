@@ -36,10 +36,10 @@ bool checkMatrix(int **matrix, int n, int r, int c)
 
 	if(s != 0) return false;
 
-
 	for(int i = r + 1, j = c - 1; i < n && j >= 0; i++, j--) s += matrix[i][j];
 
 	if(s != 0) return false;
+
 
 	return true;
 }
