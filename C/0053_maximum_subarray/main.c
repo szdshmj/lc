@@ -20,8 +20,6 @@ int maxSubArray(int* nums, int numsSize) {
 
 		if(tmp_sum >= sum)
 			sum = tmp_sum;
-		else if(tmp_sum < 0) 
-			tmp_sum = 0;
 	}
 
 	return sum;
