@@ -1,9 +1,9 @@
 #include "../inc.h"
 
-int next(int** matrix, int minRow, int minCol, int matrixRowSize, int matrixColSize, int *r, int *c, int *direct)
+void next(int** matrix, int *minRow, int *minCol, int *maxRow, int *maxCol, int *r, int *c, int *direct)
 {
 	if(*direct == 0) {// right		
-		if(*c + 1 == matrixColSize) {
+		if(*c + 1 == *maxCol) {
 			(*r)++;
 			*direct = 1;
 		}
@@ -12,7 +12,7 @@ int next(int** matrix, int minRow, int minCol, int matrixRowSize, int matrixColS
 	}
 	else if(*direct == 1) { //down
 
-		if(*r + 1 == matrixRowSize) {
+		if(*r + 1 == *maxRow) {
 			(*c)--;
 			*direct = 2;
 		}
@@ -21,7 +21,7 @@ int next(int** matrix, int minRow, int minCol, int matrixRowSize, int matrixColS
 	}
 	else if(*direct == 2) {//left
 		
-		if(*c - 1 < minCol) {
+		if(*c - 1 < *minCol) {
 			(*r)--;
 			*direct = 3;
 		}
@@ -30,15 +30,18 @@ int next(int** matrix, int minRow, int minCol, int matrixRowSize, int matrixColS
 	}
 	else if(*direct == 3) {//up
 	
-		if(*r - 1 == minRow) {
+		if(*r - 1 == *minRow) {
 			*direct = 0;
-			return 1;
+			(*minRow)++;
+			*r = *minRow;
+			(*minCol)++;
+			*c = *minCol;
+			(*maxRow)--;
+			(*maxCol)--;
 		}
 		else
 			(*r)--;
 	}
-
-	return 0;
 }
 
 int* spiralOrder(int** matrix, int matrixRowSize, int matrixColSize) {
@@ -54,11 +57,7 @@ int* spiralOrder(int** matrix, int matrixRowSize, int matrixColSize) {
 
 		p[k++] = matrix[0][0];
 		while(k < matrixRowSize * matrixColSize) {
-			if(next(matrix, minRow, minCol, maxRow, maxCol, &i, &j, &direct) == 1) {//a circle
-				minRow++; minCol++;
-				maxRow--; maxCol--;
-				i = minRow, j = minCol;
-			}
+			next(matrix, &minRow, &minCol, &maxRow, &maxCol, &i, &j, &direct);
 			p[k++] = matrix[i][j];
 		}
 	}
