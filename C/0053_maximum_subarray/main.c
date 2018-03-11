@@ -3,12 +3,8 @@
 
 int maxSubArray(int* nums, int numsSize) {
 
-	int tmp_sum = 1, sum;
-	
-	if(nums == NULL || numsSize < 1)
-		return 0;
+	int sum = nums[0], tmp_sum = nums[0];
 
-	sum = nums[0], tmp_sum = nums[0];
 	for(int i = 1; i < numsSize; i++) {
 
 		if(nums[i] > sum && sum < 0) {
@@ -27,7 +23,7 @@ int maxSubArray(int* nums, int numsSize) {
 		else if(tmp_sum < 0) 
 			tmp_sum = 0;
 	}
-	
+
 	return sum;
 }
 
