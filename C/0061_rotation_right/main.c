@@ -12,9 +12,11 @@ struct ListNode* rotateRight(struct ListNode* head, int k) {
 	for(m = 0; m <= k && i; m++)
 		i = i->next;
 
-	if((i == NULL) && (m <= k)) {
-		printf("m %d, k %d\n", m, k);
-		goto out;
+	if(i == NULL) { 
+		if (m == k)
+			goto out;
+		else if(m < k)
+			return rotateRight(head, k % m);
 	}
 
 	while(i != NULL) {
@@ -35,12 +37,13 @@ out:
 int main()
 {
 	//int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};	
-	int a[] = {1, 2};
+	int a[] = {1, 2, 3};
+	//int a[] = {1, 2};
 	//int a[] = {1};
 	struct ListNode* list = makeList(a, sizeof(a) / sizeof(a[0]));
 
 	dump(list);
-	list = rotateRight(list, 3);
+	list = rotateRight(list, 2);
 	dump(list);
 
 	return 0;
