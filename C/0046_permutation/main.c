@@ -1,25 +1,5 @@
 #include "../inc.h"
 
-/*int** genP(int **sofar, int **old, int oldSize)
-{
-	int **result = 0;
-
-	if(oldSize > 0) {
-	
-		result = malloc(sizeof(int *) * oldSize);
-	}
-}*/
-
-void dump(int **value, int returnSize, int n)
-{
-	for(int i = 0; i < returnSize; i++) {
-		for(int j = 0; j < n; j++)
-			printf("%d", value[i][j]);
-		printf("\n");
-	}
-	printf("total %d\n", returnSize);
-}
-
 int factorial(int n)
 {
 	int f = 1;
@@ -84,7 +64,7 @@ int main(int argc, char *argv[])
 		n = atoi(argv[1]);
 	
 	r = permute(nums, n, &returnSize);
-	dump(r, returnSize, n);
+	dump_int_int_m_n(r, returnSize, n);
 
 	for(int i = 0; i < returnSize; i++)
 		free(r[i]);

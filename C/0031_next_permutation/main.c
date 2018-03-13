@@ -2,14 +2,6 @@
 #include <limits.h>
 #include "../sort.h"
 
-void dump(int *nums, int numsSize)
-{
-	for(int i = 0; i < numsSize; i++)
-		printf("%d ", nums[i]);
-
-	printf("\n");
-}
-
 void nextPermutation(int* nums, int numsSize) {
 
 	int mark = -1;
@@ -48,21 +40,21 @@ int main()
 	int d[] = {9, 8, 7, 6, 5, 4, 3, 2, 1};
 
 	printf("-=-=-=-=-=-=a-=-=-=-=-=-=-=\n");
-	dump(a, sizeof(a) / sizeof(a[0]));
+	dump_int_n(a, sizeof(a) / sizeof(a[0]));
 	nextPermutation(a, sizeof(a) / sizeof(a[0]));
-	dump(a, sizeof(a) / sizeof(a[0]));
+	dump_int_n(a, sizeof(a) / sizeof(a[0]));
 	printf("-=-=-=-=-=-=b-=-=-=-=-=-=-=\n");
-	dump(b, sizeof(b) / sizeof(b[0]));
+	dump_int_n(b, sizeof(b) / sizeof(b[0]));
 	nextPermutation(b, sizeof(b) / sizeof(b[0]));
-	dump(b, sizeof(b) / sizeof(b[0]));
+	dump_int_n(b, sizeof(b) / sizeof(b[0]));
 	printf("-=-=-=-=-=-=c-=-=-=-=-=-=-=\n");
-	dump(c, sizeof(c) / sizeof(c[0]));
+	dump_int_n(c, sizeof(c) / sizeof(c[0]));
 	nextPermutation(c, sizeof(c) / sizeof(c[0]));
-	dump(c, sizeof(c) / sizeof(c[0]));
+	dump_int_n(c, sizeof(c) / sizeof(c[0]));
 	printf("-=-=-=-=-=-=d-=-=-=-=-=-=-=\n");
-	dump(d, sizeof(d) / sizeof(d[0]));
+	dump_int_n(d, sizeof(d) / sizeof(d[0]));
 	nextPermutation(d, sizeof(d) / sizeof(d[0]));
-	dump(d, sizeof(d) / sizeof(d[0]));
+	dump_int_n(d, sizeof(d) / sizeof(d[0]));
 
 	return 0;
 }

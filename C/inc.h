@@ -9,4 +9,55 @@
 	#define true 1
 	#define false 0
 #endif
+
+static void dump_int_n(int *nums, int numsSize)
+{
+	for(int i = 0; i < numsSize; i++)
+		printf("%d ", nums[i]);
+
+	printf("\n");
+}
+
+static void dump_int_m_n(int *a, int m, int n)
+{
+	for(int i = 0; i < m; i++) {
+		for(int j = 0; j < n; j++)
+			printf("%2d ", *(a + n * i + j));
+		printf("\n");
+	}
+}
+
+static void dump_int_int_m_n(int **matrix, int m, int n)
+{
+	for(int i = 0; i < m; i++) {
+		
+		for(int j = 0; j < n; j++) {
+			
+			printf("%d ", matrix[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+static void dump_char_m_n(char *board, int boardRowSize, int boardColSize) {
+
+	for(int i = 0; i < 9; i++) {
+		for(int j = 0; j < 9; j++)
+			printf("'%c', ", *(board + 9 * i + j));
+		printf("\n");
+	}
+
+	printf("\n\n");
+}
+
+static void dump_char_char_char(char ***ret, int returnSize, int *columnSizes) {
+
+	for(int i = 0; i < returnSize; i++) {
+		
+		for(int j = 0; j < columnSizes[i]; j++)
+			printf("%s ", ret[i][j]);
+
+		printf("\n");
+	}
+}
 #endif

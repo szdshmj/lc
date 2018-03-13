@@ -6,17 +6,6 @@ struct Hash_str {
 	int *list;
 };
 
-void dump(char ***ret, int returnSize, int *columnSizes) {
-
-	for(int i = 0; i < returnSize; i++) {
-		
-		for(int j = 0; j < columnSizes[i]; j++)
-			printf("%s ", ret[i][j]);
-
-		printf("\n");
-	}
-}
-
 int compare(const void *a, const void *b) { return (*(char *) a - *(char *)b);}
 
 int BKDRHash(char *s, int len)
@@ -99,6 +88,6 @@ int main()
 	
 	ret = groupAnagrams(str, sizeof(str) / sizeof(str[0]), &columnSizes, &returnSize);
 
-	dump(ret, returnSize, columnSizes);
+	dump_char_char_char(ret, returnSize, columnSizes);
 	return 0;
 }

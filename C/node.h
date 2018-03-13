@@ -26,7 +26,7 @@ struct ListNode* makeList(int *a, int n) {
 	return head;
 }
 
-void dump(struct ListNode *l) {
+void dump_list_node(struct ListNode *l) {
 
 	if(!l)
 		return;

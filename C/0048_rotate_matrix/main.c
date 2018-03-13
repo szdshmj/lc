@@ -1,15 +1,5 @@
 #include "../inc.h"
 
-void dump(int** matrix, int m, int n) {
-
-	for(int i = 0; i < m; i++) {
-		for(int j = 0; j < n; j++)
-			printf("%2d ", matrix[i][j]);
-		printf("\n");
-	}
-	printf("\n");
-}
-
 void rotate_positive_90(int** matrix, int n, int *matrixColSizes) {
 
 	for(int i = 0; i < n -1; i++) {
@@ -62,18 +52,18 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	dump(a, n, n);
+	dump_int_int_m_n(a, n, n);
 	rotate_positive_90(a, n, NULL);
-	dump(a, n, n);
+	dump_int_int_m_n(a, n, n);
 	return 0;
 	rotate_positive_90(a, n, NULL);
-	dump(a, n, n);
+	dump_int_int_m_n(a, n, n);
 	rotate_positive_90(a, n, NULL);
-	//dump(a, n, n);
+	//dump_int_int_m_n(a, n, n);
 	rotate_positive_90(a, n, NULL);
-	//dump(a, n, n);
+	//dump_int_int_m_n(a, n, n);
 	rotate_positive_180(a, n, NULL);
-	dump(a, n, n);
+	dump_int_int_m_n(a, n, n);
 
 	/*free ......
 	  for()

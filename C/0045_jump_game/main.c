@@ -16,7 +16,7 @@ Note:
 You can assume that you can always reach the last index.
 */
 
-void dump(int *next, int *step, int numsSize)
+void print(int *next, int *step, int numsSize)
 {
 	printf("next\n");
 	for(int i = 0; i < numsSize; i++) {
@@ -63,7 +63,7 @@ int jump(int *nums, int numsSize)
 		step[i] = jj;
 	}
 	
-	//dump(next, step, numsSize);
+	//print(next, step, numsSize);
 	i = 0; j = 0;
 	while(i != numsSize -1) { //printf("%d\n", step[i]);
 

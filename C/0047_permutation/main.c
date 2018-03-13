@@ -25,16 +25,6 @@ int canAdd(int num0, int **result, int *line, int lineSize, int acc)
 	return 0;
 }
 
-void dump(int **value, int returnSize, int n)
-{
-	for(int i = 0; i < returnSize; i++) {
-		for(int j = 0; j < n; j++)
-			printf("%d", value[i][j]);
-		printf("\n");
-	}
-	printf("total %d\n", returnSize);
-}
-
 int factorial(int n)
 {
 	int f = 1;
@@ -102,6 +92,6 @@ int main(int argc, char *argv[])
 		n = atoi(argv[1]);
 	
 	r = permute(nums, n, &returnSize);
-	dump(r, returnSize, n);
+	dump_int_int_m_n(r, returnSize, n);
 	return 0;
 }

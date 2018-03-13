@@ -1,13 +1,5 @@
 #include "../inc.h"
 
-void dump(int *height, int heightSize)
-{
-//	printf("t %d\n", heightSize);
-	for(int i = 0; i < heightSize; i++)
-		printf("%d ", height[i]);
-	printf("\n");
-}
-
 int newRight(int left, int s, int *height, int heightSize)
 {
 	int mark = -1, h = s;
@@ -29,7 +21,7 @@ int findABowl(int *height, int heightSize, int *result)
 {
 	int left = 0, buttom, right = - 1, pos, skip = 0;
 
-	//dump(height, heightSize);
+	//dump_int_n(height, heightSize);
 	while(left + 1 < heightSize && height[left + 1] >= height[left]) left++;
 
 	pos = left + 1;

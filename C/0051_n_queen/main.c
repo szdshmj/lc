@@ -1,17 +1,5 @@
 #include "../inc.h"
 
-void dump(int **matrix, int n)
-{
-	for(int i = 0; i < n; i++) {
-		
-		for(int j = 0; j < n; j++) {
-			
-			printf("%d ", matrix[i][j]);
-		}
-		printf("\n");
-	}
-}
-
 void dumps(char ***ret, int count, int n)
 {
 	char **m;

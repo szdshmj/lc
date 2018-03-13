@@ -1,16 +1,5 @@
 #include "../inc.h"
 
-void dump(char *board, int boardRowSize, int boardColSize) {
-
-	for(int i = 0; i < 9; i++) {
-		for(int j = 0; j < 9; j++)
-			printf("'%c', ", *(board + 9 * i + j));
-		printf("\n");
-	}
-
-	printf("\n\n");
-}
-
 void mark(int *tmp, char v)
 {
 	if(v != '.')
@@ -55,7 +44,7 @@ void updateCos(char** board, int boardRowSize, int boardColSize, int co[9][9])
 				co[i][j] = 0xffffffff;
 		}
 	}
-	//dumpCo(co);
+	//dump_char_m_nCo(co);
 }
 
 int tryKatIJ(char** board, int boardRowSize, int boardColSize, int i, int j, int k)
@@ -130,8 +119,8 @@ int main()
 	};
 #endif
 
-	//dump((char *) board, 9, 9);
+	//dump_char_m_n((char *) board, 9, 9);
 	solveSudoku((char **)board, 9, 9);
-	dump((char *) board, 9, 9);
+	dump_char_m_n((char *) board, 9, 9);
 	return 0;
 }
