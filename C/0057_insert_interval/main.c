@@ -22,16 +22,10 @@ int compare(const void *a, const void *b) { return ((struct Interval *) a)->star
 struct Interval* insert(struct Interval* intervals, int intervalsSize, struct Interval newInterval, int* returnSize) {
 	
 	struct Interval *ret = NULL;
-
-	if(intervals == NULL || intervalsSize < 1) {
-
-		ret = malloc(sizeof(struct Interval));
-		memcpy(ret, &newInterval, sizeof(struct Interval));
-		*returnSize = 1;
-		return ret;
-	}
-
 	*returnSize = 0;
+
+	for(int i = 0 ; i < intervalsSize; i++) {
+	}
 
 	
 	return ret;
