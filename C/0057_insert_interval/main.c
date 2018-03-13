@@ -33,6 +33,8 @@ struct Interval* insert(struct Interval* intervals, int intervalsSize, struct In
 
 	*returnSize = 0;
 
+	
+	return ret;
 }
 
 int main()
