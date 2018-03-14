@@ -10,6 +10,12 @@
 	#define false 0
 #endif
 
+int *make_int_m(int m)
+{
+	int *data = calloc(m, sizeof(int));
+	return data;
+}
+
 int **make_int_int_m_n(int m, int n, int *a)
 {
 	int **data = malloc(m * sizeof(int *));
