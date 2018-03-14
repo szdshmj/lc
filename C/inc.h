@@ -10,6 +10,19 @@
 	#define false 0
 #endif
 
+int **make_int_int_m_n(int m, int n, int *a)
+{
+	int **data = malloc(m * sizeof(int *));
+
+	for (int i = 0; i < m; i++) {
+		data[i] = malloc(n * sizeof(int));
+		for (int j = 0; j < n; j++)
+			data[i][j] = *(a + i * n + j);
+	}
+
+	return data;
+}
+
 static void dump_int_n(int *nums, int numsSize)
 {
 	for(int i = 0; i < numsSize; i++)
