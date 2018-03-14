@@ -59,20 +59,13 @@ int uniquePathsWithObstacles(int** obstacleGrid, int obstacleGridRowSize, int ob
 	for(int i = 0; i < obstacleGridRowSize; i++) {
 		for(int j = 0; j < obstacleGridColSize; j++) {
 
-			if(obstacleGrid[i][j] == -1) {
-
-				obstacleGrid[i][j] = obstacleGrid[i - 1][j]  + obstacleGrid[i][j - 1];
-			}
+			if(obstacleGrid[i][j] == -1)
+				obstacleGrid[i][j] = (i - 1 < 0 ? 0 : obstacleGrid[i - 1][j])  + (j - 1 < 0 ? 0 : obstacleGrid[i][j - 1]);
 		}
 	}
 
 	ret = obstacleGrid[obstacleGridRowSize - 1][obstacleGridColSize - 1];
 	//dump_int_int_m_n(obstacleGrid, obstacleGridRowSize, obstacleGridColSize);
-#if 0
-	dump_int_int_m_n(obstacleGrid, obstacleGridRowSize, obstacleGridColSize);
-	rotaion(obstacleGrid, obstacleGridRowSize, obstacleGridColSize, 0);
-	dump_int_int_m_n(obstacleGrid, obstacleGridRowSize, obstacleGridColSize);
-#endif
 
 out:
 	return ret;
