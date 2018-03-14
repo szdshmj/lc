@@ -23,11 +23,16 @@ struct Interval* insert(struct Interval* intervals, int intervalsSize, struct In
 	
 	struct Interval *ret = NULL;
 	*returnSize = 0;
+	int sl, sh;
+
+	qsort(intervals, intervalsSize, sizeof(struct Interval), &compare);
 
 	for(int i = 0 ; i < intervalsSize; i++) {
+		
+		if(newInterval.start <= intervals[i].start) {
+		}
 	}
 
-	
 	return ret;
 }
 
