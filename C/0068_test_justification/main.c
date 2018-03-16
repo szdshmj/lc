@@ -1,11 +1,26 @@
 #include "../inc.h"
 
+int eat(char** words, int wordsSize, int maxWidth, int start)
+{
+	int ret = 0;	
+	
+}
+
 char** fullJustify(char** words, int wordsSize, int maxWidth, int* returnSize) {
 
 	char **ret = NULL;
 
 	*returnSize = 0;	
 	if(words == NULL || wordsSize == 0) goto out;
+
+	for(int i = 0, skip; i < wordsSize; i += skip) {
+		
+		skip = eat(words, wordsSize, maxWidth, i);
+
+		for(int j = i; j < skip; j++)
+			printf("%s ", words[j]);
+		printf("\n");
+	}
 
 out:
 	return ret;
