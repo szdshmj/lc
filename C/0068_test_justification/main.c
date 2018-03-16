@@ -2,8 +2,22 @@
 
 int eat(char** words, int wordsSize, int maxWidth, int start)
 {
-	int ret = 0;	
+	int ret = 0, s = 0, tmp  = 0;	
 	
+	for(int i = start; i < wordsSize; i++) {
+		
+		tmp = s+ (strlen(words[i]) + 1);
+		if( tmp < maxWidth) {
+			s = tmp;
+			ret = i - start + 1;
+		}
+		else if(tmp == maxWidth) {
+			ret = i - start + 1;
+		}
+		else
+			break;
+	}
+	return ret;
 }
 
 char** fullJustify(char** words, int wordsSize, int maxWidth, int* returnSize) {
@@ -16,10 +30,10 @@ char** fullJustify(char** words, int wordsSize, int maxWidth, int* returnSize) {
 	for(int i = 0, skip; i < wordsSize; i += skip) {
 		
 		skip = eat(words, wordsSize, maxWidth, i);
-
-		for(int j = i; j < skip; j++)
-			printf("%s ", words[j]);
-		printf("\n");
+		
+		for(int j = 0; j < skip; j++) 
+			printf("%s ", words[i + j]);
+			printf("\n");
 	}
 
 out:
@@ -36,7 +50,7 @@ int main()
 
 	f = fullJustify(words, sizeof(s) / sizeof(s[0]), 16, &returnSize);
 
-	for(int i = 0; i < returnSize; i++) printf("%s\n", f[i]);
+//	for(int i = 0; i < returnSize; i++) printf("%s\n", f[i]);
 
 	return 0;
 }
