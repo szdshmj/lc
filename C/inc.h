@@ -29,7 +29,7 @@ int **make_int_int_m_n(int m, int n, int *a)
 	return data;
 }
 
-static void dump_int_n(int *nums, int numsSize)
+void dump_int_n(int *nums, int numsSize)
 {
 	for(int i = 0; i < numsSize; i++)
 		printf("%2d ", nums[i]);
@@ -37,7 +37,7 @@ static void dump_int_n(int *nums, int numsSize)
 	printf(".\n");
 }
 
-static void dump_int_m_n(int *a, int m, int n)
+void dump_int_m_n(int *a, int m, int n)
 {
 	for(int i = 0; i < m; i++) {
 		for(int j = 0; j < n; j++)
@@ -48,7 +48,7 @@ static void dump_int_m_n(int *a, int m, int n)
 	printf("..\n");
 }
 
-static void dump_int_int_m_n(int **matrix, int m, int n)
+void dump_int_int_m_n(int **matrix, int m, int n)
 {
 	for(int i = 0; i < m; i++) {
 		for(int j = 0; j < n; j++)
@@ -59,7 +59,7 @@ static void dump_int_int_m_n(int **matrix, int m, int n)
 	printf("..\n");
 }
 
-static void dump_char_m_n(char *board, int boardRowSize, int boardColSize) {
+void dump_char_m_n(char *board, int boardRowSize, int boardColSize) {
 
 	for(int i = 0; i < 9; i++) {
 		for(int j = 0; j < 9; j++)
@@ -70,7 +70,7 @@ static void dump_char_m_n(char *board, int boardRowSize, int boardColSize) {
 	printf("..\n\n");
 }
 
-static void dump_char_char_char(char ***ret, int returnSize, int *columnSizes) {
+void dump_char_char_char(char ***ret, int returnSize, int *columnSizes) {
 
 	for(int i = 0; i < returnSize; i++) {
 		for(int j = 0; j < columnSizes[i]; j++)
