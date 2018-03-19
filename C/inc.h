@@ -12,16 +12,16 @@
 
 int *make_int_m(int m)
 {
-	int *data = calloc(m, sizeof(int));
+	int *data = (int *)calloc(m, sizeof(int));
 	return data;
 }
 
 int **make_int_int_m_n(int m, int n, int *a)
 {
-	int **data = malloc(m * sizeof(int *));
+	int **data = (int **)malloc(m * sizeof(int *));
 
 	for (int i = 0; i < m; i++) {
-		data[i] = malloc(n * sizeof(int));
+		data[i] = (int *)malloc(n * sizeof(int));
 		for (int j = 0; j < n; j++)
 			data[i][j] = *(a + i * n + j);
 	}
