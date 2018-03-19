@@ -50,13 +50,13 @@ int eat(char** words, int wordsSize, int maxWidth, int start, int *pureCount)
 
 	if(wlen <= maxWidth) {
 	
-		wordCount++;
 		tmp += wlen;
 		lenCount = tmp;
-		*pureCount = tmp;
+		*pureCount += tmp;
+		wordCount++;
 	}
 
-	for(i = start + 1; i < wordsSize && tmp < maxWidth/*maxWidth - lenCount > 1*/; i++) {
+	for(i = start + 1; i < wordsSize && tmp < maxWidth; i++) {
 
 		wlen = strlen(words[i]);
 		tmp += (1 + wlen);
