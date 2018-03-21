@@ -49,12 +49,26 @@ char* simplifyPath(char* path) {
 	}
 
 	str[p++] = '/';
+	if(*(path - 1) != '/') {
+		while(*(path - 1) != '/')
+			path--;
+
+		while(*(path + 1) == '.') {
+			str[p++] = *path;
+			path++;
+		}
+	}
+
 	while(*path != '\0') {
 		ia = 0;
 		if(*path == '/'){ 
-			if(str[p - 1] != '/')
-			str[p++] = '/';
+			if(str[p - 1] != '/') {
+				str[p++] = '/';
+				str[p]= '\0';
+			}
 			path++;
+			if(*path == '\0')
+				break;
 		}
 
 		while(path[ia] != '/' && path[ia] != '\0') ia++;
@@ -66,9 +80,8 @@ char* simplifyPath(char* path) {
 			case(-2) :
 				p--;
 				while(p > 0 && str[p - 1] != '/') p--;
-				printf("%d\n", p);
 				if(p != 0)
-				str[p] = '\0';
+					str[p] = '\0';
 				break;
 			case(-1):
 				break;
@@ -92,16 +105,20 @@ int main(int argc, char *argv[])
 	char *a = "/home/";
 	char *b = "/a/./b/../../c/";
 	char *c = "/home/./ff/../../abc";
-	char *d = "/vLHjV/..///kJIUFFGIKiRx/./RQcjWKMeRTqAiXIxXCoB/.///..///..///.///qNiqHnXgtuOnV///..///zCuLznDGGVKoAHf/./../WsqYCENSj/./../../XeMlhPSwsNSdHAoi/.///J/./bdBdFNDaDf/rEGottNudXxldW/UHhQvv/..///brRIjSXsmvoKTiRVLe/nUa/LyGkYwJogagzxK/EtOSD/iSeCvWa///xsYeyInWUHCmPxYMdzO/../../TaYzVAUtdROxhZTyoBf/ssbyb/tXqmHsoPcBfNTseCCp/dEuFgdxGseYXeN///././//../DdNJ/pmbCjUQAc/Ge/RxqOBnntLS/..///../../vQcCwibUoqojHNpGf/../pijieuc/hE///DbJSQjdNNtHoOdfL///./.././HIuy/KiBLUj/CWAG/mwXPGfpAuyYWJATPL/xb/..///xrM///azpgxlfpOBEkwgEFbRBF/cLxVbwOzmpZmz/sI/gmSaqSXyit/BhPqYfM/gLZDXrtVMz/../COTozRwdivH///DAKgkm/KudvcwrJmkRcMl///WDVVsbY/bkyLXJNraxFBUTNU///MiJSxkDQKKW/BJocXq/oTXWUpFHbfVwtuQ/ESwIqKltMoibnycx/aFjoRWJZRsdyODHrL/./zJgBBZhndtnvjxmoXxJe///DAt/RpNWmaHvANFm/////sNTTPyfUGMRB/Kj/TmqywKmvXcP/midTUVh/oOAznoA///./TbqOnFpZGIPGuTLc/zwrtDqU/./CgbGSpQF///./////TqDGrzkQmwHtNjv/hbuzndcNvbYXcAYVfO/../B/qauBVbisxDEUvHO///./N/./IAB/xRQwqBvyHa/LJuvnfFZNQgY/jbJuS/jDidnyfyGibNNvgAO///./////VwXEWsEN/./hnHiZUUYDfTevV/cvFHcMJblQqmzwd///../ErPJmsxjV/../.././//RWKfqnjK/./ULNpthBQIjVgYCyxr///////RhtyjrvEkFEU/././UZGI///vdEnJmZg/./zaJfYjVLmWSvC/Iql/P/pdAwVwyAIbcmfX///rsRLlhDVtvinVcI/../JNN/GjtSgRDfCBxHo/FxJVzLidpMAwSqjLb/../fqMa///ZTNsULKAtGxGZNabDsAu/////HqwDCBISxIhu/ZFyIvFbawNemimFCuw/dBJBLoNBZSaCTdUjRab/../J/B/./OtrrVeYnxCYiVZuhcI///rWQWcgtXlOByJNOlI/./.././//./vagPbbLhABYCppbqMhjM//";
-	char *e = "/../vLHjV/..///kJIUFFGIKiRx/./RQcjWKMeRTqAiXIxXCoB/.///..///..///.///qNiqHnXgtuOnV///..///zCuLznDGGVKoAHf/./../WsqYCENSj/./../../XeMlhPSwsNSdHAoi/.///J/./bdBdFNDaDf/rEGottNudXxldW/UHhQvv/..///brRIjSXsmvoKTiRVLe/nUa/LyGkYwJogagzxK/EtOSD/iSeCvWa///xsYeyInWUHCmPxYMdzO/../../TaYzVAUtdROxhZTyoBf/ssbyb/tXqmHsoPcBfNTseCCp/dEuFgdxGseYXeN///././//../DdNJ/pmbCjUQAc/Ge/RxqOBnntLS/..///../../vQcCwibUoqojHNpGf/../pijieuc/hE///DbJSQjdNNtHoOdfL///./.././HIuy/KiBLUj/CWAG/mwXPGfpAuyYWJATPL/xb/..///xrM///azpgxlfpOBEkwgEFbRBF/cLxVbwOzmpZmz/sI/gmSaqSXyit/BhPqYfM/gLZDXrtVMz/../COTozRwdivH///DAKgkm/KudvcwrJmkRcMl///WDVVsbY/bkyLXJNraxFBUTNU///MiJSxkDQKKW/BJocXq/oTXWUpFHbfVwtuQ/ESwIqKltMoibnycx/aFjoRWJZRsdyODHrL/./zJgBBZhndtnvjxmoXxJe///DAt/RpNWmaHvANFm/////sNTTPyfUGMRB/Kj/TmqywKmvXcP/midTUVh/oOAznoA///./TbqOnFpZGIPGuTLc/zwrtDqU/./CgbGSpQF///./////TqDGrzkQmwHtNjv/hbuzndcNvbYXcAYVfO/../B/qauBVbisxDEUvHO///./N/./IAB/xRQwqBvyHa/LJuvnfFZNQgY/jbJuS/jDidnyfyGibNNvgAO///./////VwXEWsEN/./hnHiZUUYDfTevV/cvFHcMJblQqmzwd///../ErPJmsxjV/../.././//RWKfqnjK/./ULNpthBQIjVgYCyxr///////RhtyjrvEkFEU/././UZGI///vdEnJmZg/./zaJfYjVLmWSvC/Iql/P/pdAwVwyAIbcmfX///rsRLlhDVtvinVcI/../JNN/GjtSgRDfCBxHo/FxJVzLidpMAwSqjLb/../fqMa///ZTNsULKAtGxGZNabDsAu/////HqwDCBISxIhu/ZFyIvFbawNemimFCuw/dBJBLoNBZSaCTdUjRab/../J/B/./OtrrVeYnxCYiVZuhcI///rWQWcgtXlOByJNOlI/./.././//./vagPbbLhABYCppbqMhjM//";
+	char *d = "/../vLHjV/..///kJIUFFGIKiRx/./RQcjWKMeRTqAiXIxXCoB/.///..///..///.///qNiqHnXgtuOnV///..///zCuLznDGGVKoAHf/./../WsqYCENSj/./../../XeMlhPSwsNSdHAoi/.///J/./bdBdFNDaDf/rEGottNudXxldW/UHhQvv/..///brRIjSXsmvoKTiRVLe/nUa/LyGkYwJogagzxK/EtOSD/iSeCvWa///xsYeyInWUHCmPxYMdzO/../../TaYzVAUtdROxhZTyoBf/ssbyb/tXqmHsoPcBfNTseCCp/dEuFgdxGseYXeN///././//../DdNJ/pmbCjUQAc/Ge/RxqOBnntLS/..///../../vQcCwibUoqojHNpGf/../pijieuc/hE///DbJSQjdNNtHoOdfL///./.././HIuy/KiBLUj/CWAG/mwXPGfpAuyYWJATPL/xb/..///xrM///azpgxlfpOBEkwgEFbRBF/cLxVbwOzmpZmz/sI/gmSaqSXyit/BhPqYfM/gLZDXrtVMz/../COTozRwdivH///DAKgkm/KudvcwrJmkRcMl///WDVVsbY/bkyLXJNraxFBUTNU///MiJSxkDQKKW/BJocXq/oTXWUpFHbfVwtuQ/ESwIqKltMoibnycx/aFjoRWJZRsdyODHrL/./zJgBBZhndtnvjxmoXxJe///DAt/RpNWmaHvANFm/////sNTTPyfUGMRB/Kj/TmqywKmvXcP/midTUVh/oOAznoA///./TbqOnFpZGIPGuTLc/zwrtDqU/./CgbGSpQF///./////TqDGrzkQmwHtNjv/hbuzndcNvbYXcAYVfO/../B/qauBVbisxDEUvHO///./N/./IAB/xRQwqBvyHa/LJuvnfFZNQgY/jbJuS/jDidnyfyGibNNvgAO///./////VwXEWsEN/./hnHiZUUYDfTevV/cvFHcMJblQqmzwd///../ErPJmsxjV/../.././//RWKfqnjK/./ULNpthBQIjVgYCyxr///////RhtyjrvEkFEU/././UZGI///vdEnJmZg/./zaJfYjVLmWSvC/Iql/P/pdAwVwyAIbcmfX///rsRLlhDVtvinVcI/../JNN/GjtSgRDfCBxHo/FxJVzLidpMAwSqjLb/../fqMa///ZTNsULKAtGxGZNabDsAu/////HqwDCBISxIhu/ZFyIvFbawNemimFCuw/dBJBLoNBZSaCTdUjRab/../J/B/./OtrrVeYnxCYiVZuhcI///rWQWcgtXlOByJNOlI/./.././//./vagPbbLhABYCppbqMhjM//";
+	char *e = "/..hidden";
+	char *f = "/home//foo/";
+	char *g = "/home/of/foo/../../bar/../../is/./here/.";
 
 	//printf("%s\n", simplifyPath(a));
 	//printf("%s\n", simplifyPath(b));
 	//printf("%s\n", simplifyPath(c));
 	//printf("%s\n", simplifyPath(d));
 	//printf("%s\n", simplifyPath(e));
+	//printf("%s\n", simplifyPath(f));
+	printf("%s\n", simplifyPath(g));
 
-	printf("%s\n", simplifyPath(argv[1]));
+	//printf("%s\n", simplifyPath(argv[1]));
 
 	return 0;
 }
