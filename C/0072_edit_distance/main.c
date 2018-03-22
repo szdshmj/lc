@@ -7,7 +7,7 @@ int minDistance(char* word1, char* word2) {
 	dp = malloc(sizeof(int *) * (len1 + 1));
 
 	for(int i = 0; i < len1 + 1; i++) {
-		dp[i]= calloc(sizeof(int), len2 + 1);
+		dp[i]= malloc(sizeof(int), (len2 + 1));
 		dp[i][0] = i;
 	}
 
@@ -25,7 +25,9 @@ int minDistance(char* word1, char* word2) {
 		}
 	}
 
-	return dp[len1][len2];
+	min = dp[len1][len2];
+	free(dp);
+	return min;
 }
 
 int main(int argc, char *argv[])
