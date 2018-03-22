@@ -3,7 +3,38 @@
 
 int** subset(int n, int* nums, int numsSize, int** columnSizes, int* returnSize) {
 
+	int **ret;
 	if(n == 0) {
+		
+		*returnSize = 1;
+		ret = malloc(sizeof(int *));	
+		ret[0] = NULL;
+	}
+	else if(n == 1) {
+		*returnSize = numsSize;
+		ret = malloc(sizeof(int *) * numsSize);	
+		*columnSizes = malloc(sizeof(int) * numsSize);
+
+		for(int i = 0; i < numsSize; i++) {
+			ret[i] = malloc(sizeof(int));
+			ret[i][0] = nums[i];
+			(*columnSizes)[i] = 1;
+		}
+
+	}
+	else if(n == numsSize) {
+		*returnSize = 1;
+		ret = malloc(sizeof(int *));	
+		*columnSizes = malloc(sizeof(int));
+		(*columnSizes)[0] = numsSize;
+		
+		ret[0] = malloc(sizeof(int) * numsSize);
+
+		for(int i = 0; i < numsSize; i++)
+			ret[0][i] = nums[i];	
+
+	}
+	else {
 	}
 }
 
