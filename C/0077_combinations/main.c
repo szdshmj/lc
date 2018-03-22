@@ -4,11 +4,14 @@ int** merge(int **org, int *returnSize, int **tmp, int tmpSize, int n, int cSize
 {
 	int **ret;
 
+#if 0
+	ret = realloc(org, sizeof(int *) * (*returnSize + tmpSize));
+#else
 	ret = malloc(sizeof(int *) * (*returnSize + tmpSize));
 
-	for(int i = 0; i < *returnSize; i++) {
+	for(int i = 0; i < *returnSize; i++)
 		ret[i] = org[i];
-	}
+#endif
 	for(int i = 0; i < tmpSize; i++) {
 		ret[*returnSize + i] = malloc(sizeof(int) * (cSize + 1));
 		ret[*returnSize + i][0] = n;
@@ -60,9 +63,11 @@ int** combine(int n, int k, int** columnSizes, int* returnSize) {
 	*returnSize = 0;
 	ret = dfs(n, k, returnSize);
 
+#if 0
 	*columnSizes = malloc(sizeof(int) * (*returnSize));
 	for(int i = 0; i < *returnSize; i++)
 		(*columnSizes)[i] = k;
+#endif
 
 	return ret;
 }
@@ -75,11 +80,13 @@ int main(int argc, char *argv[])
 	
 	for(int i = 0; i < returnSize; i++) {
 		
+		#if 0
 		for(int j = 0; j < atoi(argv[2]); j++)
 			printf("%2d ", ret[i][j]);
 
-		free(ret[i]);
 		printf("\n");
+		#endif
+		free(ret[i]);
 	}
 	free(ret);
 	return 0;
