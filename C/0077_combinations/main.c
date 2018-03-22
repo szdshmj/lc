@@ -4,14 +4,14 @@ int** merge(int **org, int *returnSize, int **tmp, int tmpSize, int n, int cSize
 {
 	int **ret;
 
-#if 0
-	ret = realloc(org, sizeof(int *) * (*returnSize + tmpSize));
-#else
 	ret = malloc(sizeof(int *) * (*returnSize + tmpSize));
 
 	for(int i = 0; i < *returnSize; i++)
 		ret[i] = org[i];
-#endif
+
+	if(org)
+		free(org);
+
 	for(int i = 0; i < tmpSize; i++) {
 		ret[*returnSize + i] = malloc(sizeof(int) * (cSize + 1));
 		ret[*returnSize + i][0] = n;
@@ -27,7 +27,7 @@ int** merge(int **org, int *returnSize, int **tmp, int tmpSize, int n, int cSize
 
 int** dfs(int n, int k, int* returnSize) {
 	
-	int **ret;
+	int **ret = NULL;
 	
 	if(k == 1) {
 		ret = malloc(sizeof(int *) * n);
