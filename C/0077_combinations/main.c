@@ -1,24 +1,24 @@
 #include "../inc.h"
 
-int** merge(int **org, int *orgSize, int **tmp, int tmpSize, int n, int cSize)
+int** merge(int **org, int *returnSize, int **tmp, int tmpSize, int n, int cSize)
 {
 	int **ret;
 
-	ret = malloc(sizeof(int *) * (*orgSize + tmpSize));
+	ret = malloc(sizeof(int *) * (*returnSize + tmpSize));
 
-	for(int i = 0; i < *orgSize; i++) {
+	for(int i = 0; i < *returnSize; i++) {
 		ret[i] = org[i];
 	}
 	for(int i = 0; i < tmpSize; i++) {
-		ret[*orgSize + i] = malloc(sizeof(int) * (cSize + 1));
-		ret[*orgSize + i][0] = n;
+		ret[*returnSize + i] = malloc(sizeof(int) * (cSize + 1));
+		ret[*returnSize + i][0] = n;
 		for(int j = 0; j < cSize; j++) {
-			ret[*orgSize + i][j + 1] = tmp[i][j];
+			ret[*returnSize + i][j + 1] = tmp[i][j];
 		}
 		free(tmp[i]);
 	}
 
-	*orgSize += tmpSize;
+	*returnSize += tmpSize;
 	return ret;
 }
 
