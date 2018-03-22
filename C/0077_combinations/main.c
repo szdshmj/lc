@@ -15,8 +15,10 @@ int** merge(int **org, int *orgSize, int **tmp, int tmpSize, int n, int cSize)
 		for(int j = 0; j < cSize; j++) {
 			ret[*orgSize + i][j + 1] = tmp[i][j];
 		}
+		free(tmp[i]);
 	}
 
+	*orgSize += tmpSize;
 	return ret;
 }
 
@@ -44,7 +46,7 @@ int** dfs(int n, int k, int* returnSize) {
 			tmp = dfs(i - 1, k - 1, &tmpSize);
 			
 			ret = merge(ret, returnSize, tmp, tmpSize, i, k - 1);
-			*returnSize += tmpSize;
+			free(tmp);
 		}
 	}
 
@@ -76,7 +78,9 @@ int main(int argc, char *argv[])
 		for(int j = 0; j < atoi(argv[2]); j++)
 			printf("%2d ", ret[i][j]);
 
+		free(ret[i]);
 		printf("\n");
 	}
+	free(ret);
 	return 0;
 }
