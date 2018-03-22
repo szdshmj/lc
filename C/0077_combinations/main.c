@@ -38,7 +38,6 @@ int** dfs(int n, int k, int* returnSize) {
 		}
 
 		*returnSize = n;
-		return ret;
 	}
 	else {
 		
@@ -63,11 +62,9 @@ int** combine(int n, int k, int** columnSizes, int* returnSize) {
 	*returnSize = 0;
 	ret = dfs(n, k, returnSize);
 
-#if 0
 	*columnSizes = malloc(sizeof(int) * (*returnSize));
 	for(int i = 0; i < *returnSize; i++)
 		(*columnSizes)[i] = k;
-#endif
 
 	return ret;
 }
@@ -80,14 +77,15 @@ int main(int argc, char *argv[])
 	
 	for(int i = 0; i < returnSize; i++) {
 		
-		#if 0
-		for(int j = 0; j < atoi(argv[2]); j++)
+	#if 1
+		for(int j = 0; j < columnSizes[i]; j++)
 			printf("%2d ", ret[i][j]);
 
 		printf("\n");
-		#endif
+	#endif
 		free(ret[i]);
 	}
 	free(ret);
+	free(columnSizes);
 	return 0;
 }
