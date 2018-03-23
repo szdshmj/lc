@@ -13,7 +13,7 @@ void dump(int **ret, int returnSize, int *columnSizes)
 
 int expand(int **ret, int bidx, int **columnSizes, int *count, int *nums, int numsSize)
 {
-	int blen = (*columnSizes)[bidx], *base, *tmp, start = 0;
+	int blen = (*columnSizes)[bidx], *base = NULL, *tmp, start = 0;
 	
 	if(bidx != 0) {
 		base = ret[bidx]; 
