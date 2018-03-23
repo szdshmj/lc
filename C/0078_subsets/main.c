@@ -29,11 +29,6 @@ int expand(int **ret, int bidx, int **columnSizes, int *count, int *nums, int nu
 		ret[(*count)] = tmp;
 		(*columnSizes)[(*count)] = blen + 1;
 		(*count)++;
-		#if 0
-		for(int i = 0; i < blen + 1; i++)
-			printf("%2d ", ret[*count - 1][i]);
-		printf("\n");
-		#endif
 	}
 
 	return numsSize - start;
