@@ -80,4 +80,16 @@ void dump_char_char_char(char ***ret, int returnSize, int *columnSizes) {
 
 	printf("..\n\n");
 }
+
+int combinNum(int m, int n)
+{
+    int a = 1, b = 1;
+
+    if(m - n > n) n = m - n;
+    for(int i = m; i > n; i--) a *= i;
+    for(int i = m - n; i > 1; i--) b *= i;
+
+    return a / b;
+}
+
 #endif
