@@ -13,11 +13,17 @@ void dump(int **ret, int returnSize, int *columnSizes)
 
 int expand(int **ret, int bidx, int **columnSizes, int *count, int *nums, int numsSize)
 {
-	int blen = (*columnSizes)[bidx], *base = ret[bidx], *tmp, c = 0;
+	int blen = (*columnSizes)[bidx], *base, *tmp, c = 0, start = 0;
 	
-	for(int i = base[blen - 1] + 1; i < numsSize; i++) {
+	if(bidx != 0) {
+		base = ret[bidx]; 
+		start = base[blen - 1] + 1;
+	}
+	
+	for(int i = start; i < numsSize; i++) {
 		tmp = malloc(sizeof(int) * (blen + 1));	
-		memcpy(tmp, base, blen * sizeof(int));
+		if(base)
+			memcpy(tmp, base, blen * sizeof(int));
 
 		tmp[blen] = i;
 		ret[(*count)] = tmp;
@@ -34,7 +40,7 @@ int expand(int **ret, int bidx, int **columnSizes, int *count, int *nums, int nu
 
 int** subsets(int* nums, int numsSize, int** columnSizes, int* returnSize) {
 	
-	int **ret = NULL, ex = 0, count = 0, start = 1, end = numsSize;
+	int **ret = NULL, ex = 0, count = 1, start = 0, end = 0;
 
 	*returnSize = 0;
 
@@ -47,15 +53,16 @@ int** subsets(int* nums, int numsSize, int** columnSizes, int* returnSize) {
 	(*columnSizes)[0] = 0;
 	if(numsSize == 0) return ret;
 
-
+#if 0
 	for(int i = 0; i < numsSize; i++) {
 		ret[i + 1] = malloc(sizeof(int));
 		ret[i + 1][0] = i;
 		(*columnSizes)[i + 1] = 1;
 	}
-
 	count = numsSize + 1;
-	for(int i = 2; i <= numsSize; i++) {
+	#endif
+
+	for(int i = 1; i <= numsSize; i++) {
 
 		ex = 0;
 		for(int j = start; j <= end; j++)
