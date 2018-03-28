@@ -4,8 +4,6 @@ int compare(const void *a, const void *b) { return (*(int *) a - *(int *)b);}
 
 void dfs(int* nums, int numsSize, int** columnSizes, int* returnSize, int *buf, int pos, int start, int **ret) {
 
-	int go;
-
 	if(pos > 0) {
 		ret[*returnSize] = malloc(sizeof(int) * pos);
 		for(int i = 0; i < pos; i++)
@@ -19,7 +17,7 @@ void dfs(int* nums, int numsSize, int** columnSizes, int* returnSize, int *buf, 
 
 	(*returnSize)++;
 
-	for(int i = start; i < numsSize; i++) {
+	for(int i = start, go; i < numsSize; i++) {
 		go = 1;
 		for(int j = start; j < i && go == 1; j++) {
 			if(nums[j] == nums[i])
