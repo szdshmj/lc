@@ -1,7 +1,6 @@
 #include "../inc.h"
 #include <limits.h>
 
-
 char* minWindow(char* s, char* t) {
 
 	char *result;
@@ -21,11 +20,11 @@ char* minWindow(char* s, char* t) {
 		while(m[s[begin]] == 0 || (n[s[begin]] > m[s[begin]])) {
 
 			if(n[s[begin]] > m[s[begin]]) n[s[begin]]--;
-
 			begin++;
 		}
 
 		if((tmp = i - begin + 1) < size) {
+
 			size = tmp;
 			start = begin;
 		}
