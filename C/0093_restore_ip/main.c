@@ -8,7 +8,7 @@ void fetchIP(int level, char *start, char **str, char *tmp, char *s, int *return
 		if(s[0] == '\0') {
 			tmp--;
 			tmp[0] = '\0';
-			if(*returnSize ==0 || strcmp(start, str[*returnSize - 1]) != 0) /////?????????
+			if(*returnSize == 0 || strcmp(start, str[*returnSize - 1]) != 0) /////?????????
 				str[(*returnSize)++]= strdup(start);
 		}
 		return;
@@ -23,12 +23,10 @@ void fetchIP(int level, char *start, char **str, char *tmp, char *s, int *return
 			tmp[i + 1] = '.';
 
 			if(tmp[0] == '0' && tmp[1] != '.')
-				continue;
+				break;
 
 			fetchIP(level + 1, start, str, tmp + i + 2, s + i + 1, returnSize);
 		}
-		else
-			return;
 	}
 }
 
