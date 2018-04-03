@@ -29,6 +29,7 @@ int largestRectangleArea(int* heights, int heightsSize) { // {2,1,5,6,2,3};
 			max = area;
 	}
 
+	free(stack);
 	return max;
 }
 
