@@ -47,5 +47,6 @@ int maximalRectangle(char** matrix, int matrixRowSize, int matrixColSize) {
 		if(tmp > max) max = tmp;
 	}
 
+	free(heights);
 	return max;
 }
