@@ -35,8 +35,8 @@ int largestRectangleArea(int* heights, int heightsSize) { // {2,1,5,6,2,3};
 
 int main()
 {
-	int a[] = {2,1,5,6,2,3};
-	//int a[] = {1,2,3,4,5,6};
+	//int a[] = {2, 1, 5, 6, 2, 3};
+	int a[] = {1, 2, 3, 9, 10, 5, 6, 4};
 	int ret = largestRectangleArea(a, sizeof(a) / sizeof(a[0]));
 
 	printf("%d\n", ret);		
